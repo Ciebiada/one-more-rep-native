@@ -1,0 +1,36 @@
+{
+  "name": "empty-project-template",
+  "main": "node_modules/expo/AppEntry.js",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "@redux-offline/redux-offline": "^2.5.0",
+    "date-fns": "^1.29.0",
+    "expo": "^30.0.1",
+    "ramda": "^0.25.0",
+    "react": "16.3.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-native-vector-icons": "^6.0.2",
+    "react-navigation": "^2.18.2",
+    "react-redux": "^5.1.0",
+    "redux": "^4.0.1",
+    "redux-offline": "^2.0.0",
+    "typesafe-actions": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/ramda": "^0.26.0",
+    "@types/react": "^16.4.18",
+    "@types/react-native": "^0.57.7",
+    "@types/react-native-vector-icons": "^4.6.4",
+    "@types/react-navigation": "^2.13.0",
+    "@types/react-redux": "^6.0.9",
+    "react-native-typescript-transformer": "^1.2.10",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6"
+  }
+}
