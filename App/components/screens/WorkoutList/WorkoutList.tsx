@@ -1,15 +1,17 @@
 import { distanceInWordsToNow } from 'date-fns'
 import React from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { NavigationScreenProps } from 'react-navigation'
 import { IWorkout } from '../../../reducers/workouts'
 import theme from '../../../theme'
 import Header from '../../ui/Header'
 import IconButton from '../../ui/IconButton'
 import ListItem from '../../ui/ListItem'
 
-interface IWorkoutList {
-  workouts: IWorkout[],
+interface IWorkoutList extends NavigationScreenProps {
+  workouts: IWorkout[]
   onNewWorkoutClick: () => void
+  onWorkoutClick: (id: string) => () => void
 }
 
 interface IActions {
@@ -29,7 +31,7 @@ const Actions = ({ onNewWorkoutClick }: IActions) => (
   />
 )
 
-export default ({ workouts, onNewWorkoutClick }: IWorkoutList) => (
+export default ({ workouts, onNewWorkoutClick, onWorkoutClick }: IWorkoutList) => (
   <View style={styles.container}>
     <Header
       center={<Title />}
@@ -37,8 +39,13 @@ export default ({ workouts, onNewWorkoutClick }: IWorkoutList) => (
     />
     <FlatList
       data={workouts}
+      ItemSeparatorComponent={() => <View style={{paddingVertical: theme.scale}}/>}
       renderItem={({ item }) => (
-        <ListItem header={item.name} subheader={`${distanceInWordsToNow(item.date)} ago`} />
+        <ListItem
+          header={item.name}
+          subheader={`${distanceInWordsToNow(item.date)} ago`}
+          onPress={onWorkoutClick(item.id)}
+        />
       )}
       keyExtractor={(item) => item.id}
     />

@@ -4,6 +4,7 @@ import React from 'react'
 import { createStackNavigator } from 'react-navigation'
 import { Provider } from 'react-redux'
 import { createStore, StoreEnhancer } from 'redux'
+import WorkoutDetails from './components/screens/WorkoutDetails'
 import WorkoutList from './components/screens/WorkoutList'
 import reducer from './reducers'
 
@@ -13,6 +14,7 @@ const store = createStore(
 )
 
 const RootStack = createStackNavigator({
+  WorkoutDetails,
   WorkoutList,
 }, {
   headerMode: 'none',

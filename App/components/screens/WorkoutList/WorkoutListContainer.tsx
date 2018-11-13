@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { addWorkout } from '../../../actions/workouts'
@@ -10,9 +11,12 @@ const mapStateToProps = (state: IState) => ({
   workouts: R.sort(R.descend<IWorkout>(R.prop('date')), state.workouts),
 })
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: NavigationScreenProps) => ({
   onNewWorkoutClick: () => {
     dispatch(addWorkout('Morning workout'))
+  },
+  onWorkoutClick: (id: string) => () => {
+    ownProps.navigation.navigate('WorkoutDetails', {id})
   },
 })
 

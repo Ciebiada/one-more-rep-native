@@ -1,17 +1,20 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import theme from '../../theme'
 
 interface IProps {
   header: string,
+  onPress?: () => void,
   subheader?: string
 }
 
-export default ({header, subheader}: IProps) => (
-  <View style={styles.row}>
-    <Text style={styles.header}>{header}</Text>
-    {subheader && <Text style={styles.subheader}>{subheader}</Text>}
-  </View>
+export default ({ header, subheader, onPress }: IProps) => (
+  <TouchableHighlight onPress={onPress} underlayColor="#666">
+    <View style={styles.row}>
+      <Text style={styles.header}>{header}</Text>
+      {subheader && <Text style={styles.subheader}>{subheader}</Text>}
+    </View>
+  </TouchableHighlight>
 )
 
 const styles = StyleSheet.create({
@@ -22,7 +25,6 @@ const styles = StyleSheet.create({
   },
   row: {
     backgroundColor: '#fcfcfc',
-    marginVertical: theme.scale,
     paddingHorizontal: theme.scale * 2,
     paddingVertical: theme.scale * 3,
   },
