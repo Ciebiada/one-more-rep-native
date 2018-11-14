@@ -1,16 +1,15 @@
-import * as R from 'ramda'
 import { ActionType, getType } from 'typesafe-actions'
 import * as workouts from '../actions/workouts'
 
 type WorkoutsAction = ActionType<typeof workouts>
 
-export interface IWorkout {
+export interface Workout {
   id: string
   name: string
   date: string
 }
 
-export default (state: IWorkout[] = [], action: WorkoutsAction) => {
+export default (state: Workout[] = [], action: WorkoutsAction) => {
   switch (action.type) {
     case getType(workouts.addWorkout):
       return [...state, action.payload]

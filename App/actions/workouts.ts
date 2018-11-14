@@ -1,5 +1,5 @@
 import { createAction } from 'typesafe-actions'
-import { IWorkout } from '../reducers/workouts'
+import { Workout } from '../reducers/workouts'
 
 export const addWorkout = createAction('workouts/ADD', (resolve) =>
   (name: string) => resolve({
@@ -14,5 +14,5 @@ export const removeWorkout = createAction('workouts/REMOVE', (resolve) =>
 )
 
 export const updateWorkout = createAction('workouts/UPDATE', (resolve) =>
-  (id: string, workout: Partial<IWorkout>) => resolve({id, workout}),
+  (id: string, workout: Partial<Workout>) => resolve({id, workout}),
 )

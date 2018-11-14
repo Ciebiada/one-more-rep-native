@@ -2,19 +2,19 @@ import { distanceInWordsToNow } from 'date-fns'
 import React from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
-import { IWorkout } from '../../../reducers/workouts'
+import { Workout } from '../../../reducers/workouts'
 import theme from '../../../theme'
 import Header from '../../ui/Header'
 import IconButton from '../../ui/IconButton'
 import ListItem from '../../ui/ListItem'
 
-interface IWorkoutList extends NavigationScreenProps {
-  workouts: IWorkout[]
+interface WorkoutListProps extends NavigationScreenProps {
+  workouts: Workout[]
   onNewWorkoutClick: () => void
   onWorkoutClick: (id: string) => () => void
 }
 
-interface IActions {
+interface ActionsProps {
   onNewWorkoutClick: () => void
 }
 
@@ -22,16 +22,16 @@ const Title = () => (
   <Text style={styles.title}>one<Text style={styles.bold}>more</Text>rep</Text>
 )
 
-const Actions = ({ onNewWorkoutClick }: IActions) => (
+const Actions = ({ onNewWorkoutClick }: ActionsProps) => (
   <IconButton
     iconName="plus-circle-outline"
     size={30}
-    color={theme.palette.darkAction}
+    color={theme.palette.action}
     onPress={onNewWorkoutClick}
   />
 )
 
-export default ({ workouts, onNewWorkoutClick, onWorkoutClick }: IWorkoutList) => (
+export default ({ workouts, onNewWorkoutClick, onWorkoutClick }: WorkoutListProps) => (
   <View style={styles.container}>
     <Header
       center={<Title />}
@@ -57,12 +57,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   container: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: theme.palette.background,
     flex: 1,
   },
   title: {
-    color: 'white',
-    fontSize: 26,
+    color: '#333',
+    fontSize: 24,
     fontWeight: '300',
   },
 })

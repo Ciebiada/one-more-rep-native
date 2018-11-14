@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import workouts, { IWorkout } from './workouts'
+import workouts, { Workout } from './workouts'
 
-export interface IState {
-  workouts: IWorkout[]
+export interface State {
+  workouts: Workout[]
 }
 
 export default combineReducers({

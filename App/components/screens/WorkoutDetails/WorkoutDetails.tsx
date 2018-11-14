@@ -1,22 +1,17 @@
 import React from 'react'
 import { Alert, StyleSheet, Text, View } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
-import { IWorkout } from '../../../reducers/workouts'
 import theme from '../../../theme'
 import Header from '../../ui/Header'
 import IconButton from '../../ui/IconButton'
 
-interface IWorkoutList extends NavigationScreenProps {
+interface WorkoutListProps extends NavigationScreenProps {
   onDeleteWorkoutClick: () => void
 }
 
-interface IActions {
+interface ActionsProps {
   onDeleteWorkoutClick: () => void
 }
-
-const Title = () => (
-  <Text style={styles.title}>one<Text style={styles.bold}>more</Text>rep</Text>
-)
 
 const deleteWorkoutModal = (deleteWorkout: () => void) => () => {
   Alert.alert('Delete workout', 'Are you sure?', [
@@ -25,16 +20,16 @@ const deleteWorkoutModal = (deleteWorkout: () => void) => () => {
   ])
 }
 
-const Actions = ({ onDeleteWorkoutClick }: IActions) => (
+const Actions = ({ onDeleteWorkoutClick }: ActionsProps) => (
   <IconButton
-    iconName="delete"
+    iconName="delete-forever"
     size={30}
-    color={theme.palette.darkAction}
+    color={theme.palette.action}
     onPress={deleteWorkoutModal(onDeleteWorkoutClick)}
   />
 )
 
-export default ({ onDeleteWorkoutClick, navigation }: IWorkoutList) => (
+export default ({ onDeleteWorkoutClick, navigation }: WorkoutListProps) => (
   <View style={styles.container}>
     <Header
       navigation={navigation}
@@ -48,12 +43,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   container: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: theme.palette.background,
     flex: 1,
-  },
-  title: {
-    color: 'white',
-    fontSize: 26,
-    fontWeight: '300',
   },
 })
