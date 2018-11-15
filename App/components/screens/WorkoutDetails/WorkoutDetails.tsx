@@ -16,7 +16,7 @@ interface ActionsProps {
 const deleteWorkoutModal = (deleteWorkout: () => void) => () => {
   Alert.alert('Delete workout', 'Are you sure?', [
     {text: 'Cancel', style: 'cancel'},
-    {text: 'Yes', onPress: deleteWorkout},
+    {text: 'Delete', onPress: deleteWorkout},
   ])
 }
 

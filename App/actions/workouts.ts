@@ -1,11 +1,21 @@
+import { getHours, isAfter } from 'date-fns'
+import * as R from 'ramda'
 import { createAction } from 'typesafe-actions'
 import { Workout } from '../reducers/workouts'
 
+const timeBasedName = (time: Date) =>
+  R.cond([
+    [R.gte(4), R.always('Night workout')],
+    [R.gte(12), R.always('Morning workout')],
+    [R.gte(17), R.always('Afternoon workout')],
+    [R.T, R.always('Evening workout')],
+  ])(getHours(time))
+
 export const addWorkout = createAction('workouts/ADD', (resolve) =>
-  (name: string) => resolve({
+  () => resolve({
     date: new Date().toJSON(),
     id: new Date().toJSON(),
-    name,
+    name: timeBasedName(new Date()),
   }),
 )
 
