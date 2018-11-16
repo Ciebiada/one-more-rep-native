@@ -1,12 +1,16 @@
 import React from 'react'
 import { Alert, StyleSheet, Text, View } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
+import { Workout } from '../../../reducers/workouts'
 import theme from '../../../theme'
 import Header from '../../ui/Header'
 import IconButton from '../../ui/IconButton'
+import Input from '../../ui/Input'
 
 interface WorkoutListProps extends NavigationScreenProps {
+  workout: Workout
   onDeleteWorkoutClick: () => void
+  onNameChange: (name: string) => void
 }
 
 interface ActionsProps {
@@ -29,13 +33,20 @@ const Actions = ({ onDeleteWorkoutClick }: ActionsProps) => (
   />
 )
 
-export default ({ onDeleteWorkoutClick, navigation }: WorkoutListProps) => (
-  <View style={styles.container}>
-    <Header
-      navigation={navigation}
-      right={<Actions onDeleteWorkoutClick={onDeleteWorkoutClick} />}
-    />
-  </View>
+export default ({ workout, onDeleteWorkoutClick, onNameChange, navigation }: WorkoutListProps) => (
+  workout ? (
+    <View style={styles.container}>
+      <Header
+        navigation={navigation}
+        right={<Actions onDeleteWorkoutClick={onDeleteWorkoutClick} />}
+      />
+      <Input
+        value={workout.name}
+        onChangeText={onNameChange}
+        placeholder="Name"
+      />
+    </View>
+  ) : null
 )
 
 const styles = StyleSheet.create({
