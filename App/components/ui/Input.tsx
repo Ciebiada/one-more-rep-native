@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, TextInputProps, TouchableHighlight, View } from 'react-native'
+import { StyleSheet, TextInput, TextInputProps } from 'react-native'
 import theme from '../../theme'
 
 export default (props: TextInputProps) => (
@@ -8,9 +8,13 @@ export default (props: TextInputProps) => (
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: theme.palette.backgroundSecondary,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: theme.palette.separator,
     color: theme.palette.text,
-    fontSize: 14,
-    padding: theme.scale * 2,
+    fontSize: 18,
+    height: 40,
+    marginHorizontal: theme.scale * 2,
+    marginVertical: theme.scale,
+    paddingVertical: theme.scale,
   },
 })

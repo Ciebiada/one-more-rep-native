@@ -11,6 +11,10 @@ const mapStateToProps = (state: State, ownProps: NavigationScreenProps) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: NavigationScreenProps) => ({
+  onDateChange: (date: string) => {
+    const id = ownProps.navigation.getParam('id')
+    dispatch(updateWorkout(id, {date}))
+  },
   onDeleteWorkoutClick: () => {
     const id = ownProps.navigation.getParam('id')
     dispatch(removeWorkout(id))
