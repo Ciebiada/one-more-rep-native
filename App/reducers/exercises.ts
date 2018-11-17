@@ -1,6 +1,7 @@
 import * as R from 'ramda'
 import { combineReducers } from 'redux'
 import { ActionType, getType } from 'typesafe-actions'
+import { RootState } from '.'
 import * as exercises from '../actions/exercises'
 
 export interface Exercise {
@@ -10,7 +11,7 @@ export interface Exercise {
 
 type ExercisesAction = ActionType<typeof exercises>
 
-const byId =  (state: {[id: string]: Exercise} = {}, action: ExercisesAction) => {
+const byId = (state: { [id: string]: Exercise } = {}, action: ExercisesAction) => {
   switch (action.type) {
     case getType(exercises.addExercise):
       return R.assoc(action.payload.exercise.id, action.payload.exercise, state)
@@ -19,7 +20,7 @@ const byId =  (state: {[id: string]: Exercise} = {}, action: ExercisesAction) =>
   }
 }
 
-const allIds =  (state: string[] = [], action: ExercisesAction) => {
+const allIds = (state: string[] = [], action: ExercisesAction) => {
   switch (action.type) {
     case getType(exercises.addExercise):
       return R.append(action.payload.exercise.id, state)
@@ -27,6 +28,9 @@ const allIds =  (state: string[] = [], action: ExercisesAction) => {
       return state
   }
 }
+
+export const getExercises = (state: RootState, workoutId: string) =>
+  state.workouts.byId[workoutId].exercises.map((id) => state.exercises.byId[id])
 
 export default combineReducers({
   allIds,

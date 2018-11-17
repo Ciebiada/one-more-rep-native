@@ -14,6 +14,7 @@ const timeBasedName = (time: Date) =>
 export const addWorkout = createAction('workouts/ADD', (resolve) =>
   () => resolve({
     date: new Date().toJSON(),
+    exercises: [],
     id: new Date().toJSON(),
     name: timeBasedName(new Date()),
   }),

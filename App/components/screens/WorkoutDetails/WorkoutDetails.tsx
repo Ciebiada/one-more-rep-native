@@ -7,6 +7,7 @@ import DatePicker from '../../ui/DatePicker'
 import Header from '../../ui/Header'
 import IconButton from '../../ui/IconButton'
 import Input from '../../ui/Input'
+import ExerciseList from './ExerciseList'
 
 interface WorkoutListProps extends NavigationScreenProps {
   workout: Workout
@@ -67,6 +68,7 @@ export default ({
         date={workout.date}
         onDateChange={onDateChange}
       />
+      <ExerciseList workoutId={workout.id} />
     </View>
   ) : null
 )

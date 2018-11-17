@@ -37,7 +37,7 @@ const byId = (state: { [id: string]: Workout } = {}, action: WorkoutsAction) => 
   }
 }
 
-const allIds =  (state: string[] = [], action: WorkoutsAction) => {
+const allIds = (state: string[] = [], action: WorkoutsAction) => {
   switch (action.type) {
     case getType(workouts.addWorkout):
       return R.append(action.payload.id, state)
