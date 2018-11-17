@@ -7,10 +7,11 @@ interface IconButtonProps {
   iconName: string
   onPress: () => void,
   size?: number
+  style?: {},
 }
 
-export default ({color, iconName, onPress, size = 24}: IconButtonProps) => (
-  <TouchableOpacity onPress={onPress}>
+export default ({color, iconName, onPress, size = 24, style}: IconButtonProps) => (
+  <TouchableOpacity onPress={onPress} style={style}>
     <Icon name={iconName} size={size} color={color ? color : 'white'} />
   </TouchableOpacity>
 )

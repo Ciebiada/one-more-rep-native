@@ -3,7 +3,7 @@ export default {
     action: '#FF2D55',
     background: '#efefef',
     backgroundSecondary: '#fff',
-    separator: '#ccc',
+    separator: '#ddd',
     text: '#444',
     textSecondary: '#777',
   },

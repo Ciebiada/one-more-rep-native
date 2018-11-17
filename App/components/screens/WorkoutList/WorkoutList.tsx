@@ -10,32 +10,32 @@ import ListItem from '../../ui/ListItem'
 
 interface WorkoutListProps extends NavigationScreenProps {
   workouts: Workout[]
-  onNewWorkoutClick: () => void
+  onAddWorkoutClick: () => void
   onWorkoutClick: (id: string) => () => void
 }
 
 interface ActionsProps {
-  onNewWorkoutClick: () => void
+  onAddWorkoutClick: () => void
 }
 
 const Title = () => (
   <Text style={styles.title}>one<Text style={styles.bold}>more</Text>rep</Text>
 )
 
-const Actions = ({ onNewWorkoutClick }: ActionsProps) => (
+const Actions = ({ onAddWorkoutClick }: ActionsProps) => (
   <IconButton
-    iconName="plus-circle-outline"
+    iconName="plus-circle"
     size={30}
     color={theme.palette.action}
-    onPress={onNewWorkoutClick}
+    onPress={onAddWorkoutClick}
   />
 )
 
-export default ({ workouts, onNewWorkoutClick, onWorkoutClick }: WorkoutListProps) => (
+export default ({ workouts, onAddWorkoutClick, onWorkoutClick }: WorkoutListProps) => (
   <View style={styles.container}>
     <Header
       center={<Title />}
-      right={<Actions onNewWorkoutClick={onNewWorkoutClick} />}
+      right={<Actions onAddWorkoutClick={onAddWorkoutClick} />}
     />
     <FlatList
       data={workouts}

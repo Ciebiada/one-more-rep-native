@@ -21,7 +21,10 @@ export default (props: DatePickerProps) => (
 const styles = StyleSheet.create({
   dateInput: {
     alignItems: 'flex-start',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: theme.palette.separator,
     borderWidth: 0,
+    marginHorizontal: theme.scale * 2,
     paddingVertical: theme.scale,
   },
   dateText: {
@@ -29,10 +32,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   datepicker: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: theme.palette.separator,
     height: 40,
-    marginHorizontal: theme.scale * 2,
     marginVertical: theme.scale,
     width: '100%',
   },

@@ -12,7 +12,7 @@ const mapStateToProps = (state: State) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: NavigationScreenProps) => ({
-  onNewWorkoutClick: () => {
+  onAddWorkoutClick: () => {
     dispatch(addWorkout())
   },
   onWorkoutClick: (id: string) => () => {

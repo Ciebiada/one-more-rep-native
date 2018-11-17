@@ -1,5 +1,5 @@
-import React from 'react'
-import { Alert, StyleSheet, Text, View } from 'react-native'
+import React, { Fragment } from 'react'
+import { Alert, Button, StyleSheet, Text, View } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { Workout } from '../../../reducers/workouts'
 import theme from '../../../theme'
@@ -27,12 +27,22 @@ const deleteWorkoutModal = (deleteWorkout: () => void) => () => {
 }
 
 const Actions = ({ onDeleteWorkoutClick }: ActionsProps) => (
-  <IconButton
-    iconName="delete-forever"
-    size={30}
-    color={theme.palette.action}
-    onPress={deleteWorkoutModal(onDeleteWorkoutClick)}
-  />
+  <View style={styles.actions}>
+    <IconButton
+      iconName="delete"
+      size={30}
+      color={theme.palette.action}
+      onPress={deleteWorkoutModal(onDeleteWorkoutClick)}
+      style={styles.icon}
+    />
+    <IconButton
+      iconName="plus-circle"
+      color={theme.palette.action}
+      size={30}
+      // onPress={addExercise(onAddExerciseClick)}
+      style={styles.icon}
+    />
+  </View>
 )
 
 export default ({ workout, onDateChange, onDeleteWorkoutClick, onNameChange, navigation }: WorkoutListProps) => (
@@ -57,11 +67,17 @@ export default ({ workout, onDateChange, onDeleteWorkoutClick, onNameChange, nav
 )
 
 const styles = StyleSheet.create({
-  bold:   {
+  actions: {
+    flexDirection: 'row',
+  },
+  bold: {
     fontWeight: 'bold',
   },
   container: {
-    backgroundColor: theme.palette.background,
+    backgroundColor: theme.palette.backgroundSecondary,
     flex: 1,
+  },
+  icon: {
+    marginLeft: theme.scale * 2,
   },
 })
