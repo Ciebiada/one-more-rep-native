@@ -10,12 +10,14 @@ import Input from '../../ui/Input'
 
 interface WorkoutListProps extends NavigationScreenProps {
   workout: Workout
+  onAddExerciseClick: () => void
   onDateChange: (date: string) => void
   onDeleteWorkoutClick: () => void
   onNameChange: (name: string) => void
 }
 
 interface ActionsProps {
+  onAddExerciseClick: () => void
   onDeleteWorkoutClick: () => void
 }
 
@@ -26,7 +28,7 @@ const deleteWorkoutModal = (deleteWorkout: () => void) => () => {
   ])
 }
 
-const Actions = ({ onDeleteWorkoutClick }: ActionsProps) => (
+const Actions = ({ onDeleteWorkoutClick, onAddExerciseClick }: ActionsProps) => (
   <View style={styles.actions}>
     <IconButton
       iconName="delete"
@@ -39,18 +41,21 @@ const Actions = ({ onDeleteWorkoutClick }: ActionsProps) => (
       iconName="plus-circle"
       color={theme.palette.action}
       size={30}
-      // onPress={addExercise(onAddExerciseClick)}
+      onPress={onAddExerciseClick}
       style={styles.icon}
     />
   </View>
 )
 
-export default ({ workout, onDateChange, onDeleteWorkoutClick, onNameChange, navigation }: WorkoutListProps) => (
+export default ({
+  workout, onDateChange, onAddExerciseClick, onDeleteWorkoutClick, onNameChange, navigation,
+}: WorkoutListProps,
+  ) => (
   workout ? (
     <View style={styles.container}>
       <Header
         navigation={navigation}
-        right={<Actions onDeleteWorkoutClick={onDeleteWorkoutClick} />}
+        right={<Actions onAddExerciseClick={onAddExerciseClick} onDeleteWorkoutClick={onDeleteWorkoutClick} />}
       />
       <Input
         value={workout.name}

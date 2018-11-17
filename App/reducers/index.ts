@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
+import { StateType } from 'typesafe-actions'
+import workouts from './workouts'
 
-import workouts, { Workout } from './workouts'
-
-export interface State {
-  workouts: Workout[]
-}
-
-export default combineReducers({
+const rootReducer = combineReducers({
   workouts,
 })
+
+export default rootReducer
+
+export type RootState = StateType<typeof rootReducer>

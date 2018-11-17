@@ -1,4 +1,4 @@
-import { getHours, isAfter } from 'date-fns'
+import { getHours } from 'date-fns'
 import * as R from 'ramda'
 import { createAction } from 'typesafe-actions'
 import { Workout } from '../reducers/workouts'
@@ -24,5 +24,5 @@ export const removeWorkout = createAction('workouts/REMOVE', (resolve) =>
 )
 
 export const updateWorkout = createAction('workouts/UPDATE', (resolve) =>
-  (id: string, workout: Partial<Workout>) => resolve({id, workout}),
+  (id: string, props: Partial<Workout>) => resolve({id, props}),
 )
