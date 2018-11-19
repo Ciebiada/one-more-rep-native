@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { SafeAreaView, StyleSheet, View } from 'react-native'
+import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native'
 import { NavigationParams, NavigationRoute, NavigationScreenProp } from 'react-navigation'
 import theme from '../../theme'
 import IconButton from './IconButton'
@@ -17,14 +17,15 @@ interface GoBackProps {
 const GoBack = ({navigation}: GoBackProps) => (
   <IconButton
     iconName="chevron-left"
-    size={30}
-    color={theme.palette.action}
+    size={32}
+    color={theme.palette.textSecondary}
     onPress={() => navigation.goBack()}
   />
 )
 
 export default ({center, navigation, right}: HeaderProps) => (
   <SafeAreaView>
+    <StatusBar barStyle="light-content" />
     <View style={styles.header}>
       <View style={styles.left}>
         {navigation && <GoBack navigation={navigation} />}
@@ -42,8 +43,10 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
+    borderBottomColor: theme.palette.separator,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
-    height: theme.scale * 7,
+    paddingVertical: theme.scale,
   },
   left: {
     alignItems: 'flex-start',

@@ -24,9 +24,9 @@ const Title = () => (
 
 const Actions = ({ onAddWorkoutClick }: ActionsProps) => (
   <IconButton
-    iconName="plus-circle"
-    size={30}
-    color={theme.palette.action}
+    iconName="plus-circle-outline"
+    size={32}
+    color={theme.palette.accent}
     onPress={onAddWorkoutClick}
   />
 )
@@ -38,8 +38,8 @@ export default ({ workouts, onAddWorkoutClick, onWorkoutClick }: WorkoutListProp
       right={<Actions onAddWorkoutClick={onAddWorkoutClick} />}
     />
     <FlatList
+      ListEmptyComponent={<Text style={styles.empty}>You have no workouts</Text>}
       data={workouts}
-      ItemSeparatorComponent={() => <View style={{paddingVertical: theme.scale}}/>}
       renderItem={({ item }) => (
         <ListItem
           header={item.name}
@@ -60,9 +60,16 @@ const styles = StyleSheet.create({
     backgroundColor: theme.palette.background,
     flex: 1,
   },
+  empty: {
+    alignSelf: 'center',
+    color: theme.palette.textSecondary,
+    fontWeight: '600',
+    marginTop: theme.scale * 3,
+  },
   title: {
-    color: '#333',
+    color: '#fff',
     fontSize: 24,
     fontWeight: '300',
+    paddingBottom: 6,
   },
 })

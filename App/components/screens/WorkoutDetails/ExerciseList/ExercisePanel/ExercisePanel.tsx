@@ -16,11 +16,15 @@ export default ({ exercise }: ExercisePanelProps) => (
 
 const styles = StyleSheet.create({
   container: {
-    margin: theme.scale * 2,
+    backgroundColor: '#444',
+    borderRadius: 5,
+    marginBottom: theme.scale * 2,
+    padding: theme.scale * 2,
   },
   name: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: theme.palette.separator,
+    color: theme.palette.text,
     fontSize: 20,
     marginBottom: theme.scale,
   },

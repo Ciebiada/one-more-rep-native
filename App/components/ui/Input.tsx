@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     color: theme.palette.text,
     fontSize: 18,
     height: 40,
-    marginHorizontal: theme.scale * 2,
     marginVertical: theme.scale,
     paddingVertical: theme.scale,
   },

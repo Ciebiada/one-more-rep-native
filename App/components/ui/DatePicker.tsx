@@ -7,6 +7,7 @@ export default (props: DatePickerProps) => (
   <DatePicker
     style={styles.datepicker}
     customStyles={{
+      btnTextConfirm: { color: theme.palette.accent },
       dateInput: styles.dateInput,
       dateText: styles.dateText,
     }}
@@ -21,19 +22,14 @@ export default (props: DatePickerProps) => (
 const styles = StyleSheet.create({
   dateInput: {
     alignItems: 'flex-start',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: theme.palette.separator,
     borderWidth: 0,
-    marginHorizontal: theme.scale * 2,
-    paddingVertical: theme.scale,
   },
   dateText: {
-    color: theme.palette.text,
-    fontSize: 18,
+    color: theme.palette.textSecondary,
+    fontSize: 14,
+    height: 40,
   },
   datepicker: {
-    height: 40,
-    marginVertical: theme.scale,
     width: '100%',
   },
 })

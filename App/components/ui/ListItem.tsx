@@ -9,7 +9,7 @@ interface ListItemProps {
 }
 
 export default ({ header, subheader, onPress }: ListItemProps) => (
-  <TouchableHighlight onPress={onPress} underlayColor="#666">
+  <TouchableHighlight onPress={onPress} underlayColor={theme.palette.separator}>
     <View style={styles.row}>
       <Text style={styles.header}>{header}</Text>
       {subheader && <Text style={styles.subheader}>{subheader}</Text>}
@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   row: {
-    backgroundColor: theme.palette.backgroundSecondary,
-    paddingHorizontal: theme.scale * 2,
+    borderBottomColor: theme.palette.separator,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    marginHorizontal: theme.scale * 2,
     paddingVertical: theme.scale * 3,
   },
   subheader: {
