@@ -27,9 +27,12 @@ const styles = StyleSheet.create({
   dateText: {
     color: theme.palette.textSecondary,
     fontSize: 14,
-    height: 40,
+    // height: 40,
+    height: '100%',
+    // flex: undefined,
   },
   datepicker: {
     width: '100%',
+    height: 24,
   },
 })

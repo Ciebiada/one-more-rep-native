@@ -17,7 +17,7 @@ export default ({ exercise }: ExercisePanelProps) => (
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#444',
-    borderRadius: 5,
+    borderRadius: 8,
     marginBottom: theme.scale * 2,
     padding: theme.scale * 2,
   },
