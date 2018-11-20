@@ -1,12 +1,11 @@
-import React, { Fragment } from 'react'
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import React from 'react'
+import { Alert, StyleSheet, TextInput, View } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { Workout } from '../../../reducers/workouts'
 import theme from '../../../theme'
 import DatePicker from '../../ui/DatePicker'
 import Header from '../../ui/Header'
 import IconButton from '../../ui/IconButton'
-import Input from '../../ui/Input'
 import Section from '../../ui/Section'
 import ExerciseList from './ExerciseList'
 
@@ -66,6 +65,7 @@ export default ({
             onChangeText={onNameChange}
             placeholder="Name"
             selectionColor={theme.palette.accent}
+            underlineColorAndroid="transparent"
           />
           <DatePicker
             placeholder="Date"

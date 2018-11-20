@@ -22,8 +22,6 @@ const styles = StyleSheet.create({
     padding: theme.scale * 2,
   },
   name: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: theme.palette.separator,
     color: theme.palette.text,
     fontSize: 20,
     marginBottom: theme.scale,

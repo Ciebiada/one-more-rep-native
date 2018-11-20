@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native'
+import { Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native'
 import { NavigationParams, NavigationRoute, NavigationScreenProp } from 'react-navigation'
 import theme from '../../theme'
 import IconButton from './IconButton'
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     borderBottomColor: theme.palette.separator,
     borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
+    marginTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight,
     paddingVertical: theme.scale,
   },
   left: {
