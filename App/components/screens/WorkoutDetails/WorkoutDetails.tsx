@@ -1,5 +1,6 @@
 import React from 'react'
 import { Alert, StyleSheet, TextInput, View } from 'react-native'
+import DateTimePicker from 'react-native-modal-datetime-picker'
 import { NavigationScreenProps } from 'react-navigation'
 import { Workout } from '../../../reducers/workouts'
 import theme from '../../../theme'
@@ -59,19 +60,21 @@ export default ({
           right={<Actions onAddExerciseClick={onAddExerciseClick} onDeleteWorkoutClick={onDeleteWorkoutClick} />}
         />
         <Section>
-          <TextInput
-            style={styles.name}
-            value={workout.name}
-            onChangeText={onNameChange}
-            placeholder="Name"
-            selectionColor={theme.palette.accent}
-            underlineColorAndroid="transparent"
-          />
-          <DatePicker
-            placeholder="Date"
-            date={workout.date}
-            onDateChange={onDateChange}
-          />
+          <View style={styles.details}>
+            <TextInput
+              style={styles.name}
+              value={workout.name}
+              onChangeText={onNameChange}
+              placeholder="Name"
+              selectionColor={theme.palette.accent}
+              underlineColorAndroid="transparent"
+            />
+            <DatePicker
+              placeholder="Date"
+              date={workout.date}
+              onDateChange={onDateChange}
+            />
+          </View>
         </Section>
         <Section>
           <ExerciseList workoutId={workout.id} />
@@ -91,6 +94,10 @@ const styles = StyleSheet.create({
     backgroundColor: theme.palette.background,
     flex: 1,
   },
+  details: {
+    marginBottom: theme.scale * 2,
+    marginTop: theme.scale,
+  },
   icon: {
     marginLeft: theme.scale * 2,
   },
@@ -98,6 +105,5 @@ const styles = StyleSheet.create({
     color: theme.palette.text,
     fontSize: 18,
     fontWeight: '500',
-    marginTop: theme.scale,
   },
 })

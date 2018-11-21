@@ -1,36 +1,59 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import DatePicker, { DatePickerProps } from 'react-native-datepicker'
+import { distanceInWordsToNow } from 'date-fns'
+import React, { Component } from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import DateTimePicker from 'react-native-modal-datetime-picker'
 import theme from '../../theme'
 
-export default (props: DatePickerProps) => (
-  <DatePicker
-    style={styles.datepicker}
-    customStyles={{
-      btnTextConfirm: { color: theme.palette.accent },
-      dateInput: styles.dateInput,
-      dateText: styles.dateText,
-    }}
-    showIcon={false}
-    confirmBtnText="Done"
-    cancelBtnText="Cancel"
-    mode="datetime"
-    {...props}
-  />
-)
+interface DatePickerProps {
+  onDateChange: (date: string) => void
+  date?: string
+  placeholder?: string
+}
+
+interface State {
+  datePickerVisible: boolean
+}
+
+export default class DatePicker extends Component<DatePickerProps> {
+  public static defaultProps = {
+    placeholder: 'Date',
+  }
+
+  public state: State = {
+    datePickerVisible: false,
+  }
+
+  public render() {
+    const { date, placeholder } = this.props
+    const { datePickerVisible } = this.state
+
+    return (
+      <View>
+        <TouchableOpacity onPress={this.showDatePicker}>
+          <Text style={styles.date}>{date ? `${distanceInWordsToNow(date)} ago` : placeholder}</Text>
+        </TouchableOpacity>
+        <DateTimePicker
+          isVisible={datePickerVisible}
+          onCancel={this.hideDatePicker}
+          onConfirm={this.selectDate}
+        />
+      </View>
+    )
+  }
+
+  private showDatePicker = () => this.setState({datePickerVisible: true})
+
+  private hideDatePicker = () => this.setState({datePickerVisible: false})
+
+  private selectDate = (date: Date) => {
+    this.props.onDateChange(date.toJSON())
+    this.hideDatePicker()
+  }
+}
 
 const styles = StyleSheet.create({
-  dateInput: {
-    alignItems: 'flex-start',
-    borderWidth: 0,
-  },
-  dateText: {
+  date: {
     color: theme.palette.textSecondary,
     fontSize: 14,
-    height: '100%',
-  },
-  datepicker: {
-    height: 24,
-    width: '100%',
   },
 })
