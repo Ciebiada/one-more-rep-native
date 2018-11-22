@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
 import theme from '../../theme'
+import MyText from './MyText'
 
 interface DatePickerProps {
   onDateChange: (date: string) => void
@@ -30,7 +31,7 @@ export default class DatePicker extends Component<DatePickerProps> {
     return (
       <View>
         <TouchableOpacity onPress={this.showDatePicker}>
-          <Text style={styles.date}>{date ? `${distanceInWordsToNow(date)} ago` : placeholder}</Text>
+          <MyText><Text style={styles.date}>{date ? `${distanceInWordsToNow(date)} ago` : placeholder}</Text></MyText>
         </TouchableOpacity>
         <DateTimePicker
           isVisible={datePickerVisible}

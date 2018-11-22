@@ -2,6 +2,7 @@ import React from 'react'
 import { FlatList, StyleSheet, Text } from 'react-native'
 import { Exercise } from '../../../../reducers/exercises'
 import theme from '../../../../theme'
+import MyText from '../../../ui/MyText'
 import ExercisePanel from './ExercisePanel/ExercisePanel'
 
 interface ExerciseListProps {
@@ -11,7 +12,7 @@ interface ExerciseListProps {
 export default ({ exercises }: ExerciseListProps) => (
   <FlatList
     style={styles.list}
-    ListEmptyComponent={<Text style={styles.empty}>No exercises yet</Text>}
+    ListEmptyComponent={<MyText><Text style={styles.empty}>No exercises yet</Text></MyText>}
     data={exercises}
     renderItem={({ item }) => <ExercisePanel key={item.id} exercise={item} />}
     keyExtractor={(item) => item.id}

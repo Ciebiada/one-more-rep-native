@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import theme from '../../theme'
+import MyText from './MyText'
 
 interface ListItemProps {
   header: string,
@@ -11,8 +12,10 @@ interface ListItemProps {
 export default ({ header, subheader, onPress }: ListItemProps) => (
   <TouchableHighlight onPress={onPress} underlayColor={theme.palette.separator}>
     <View style={styles.row}>
-      <Text style={styles.header}>{header}</Text>
-      {subheader && <Text style={styles.subheader}>{subheader}</Text>}
+      <MyText>
+        <Text style={styles.header}>{header}</Text>
+      </MyText>
+      {subheader && <MyText><Text style={styles.subheader}>{subheader}</Text></MyText>}
     </View>
   </TouchableHighlight>
 )
