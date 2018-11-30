@@ -1,17 +1,20 @@
 import { distanceInWordsToNow } from 'date-fns'
 import React from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { Workout } from '../../../reducers/workouts'
 import theme from '../../../theme'
+import AppText from '../../ui/AppText'
+import Container from '../../ui/Container'
 import Header from '../../ui/Header'
+import Heading from '../../ui/Heading'
 import IconButton from '../../ui/IconButton'
 import ListItem from '../../ui/ListItem'
-import MyText from '../../ui/MyText'
+import Section from '../../ui/Section'
+import Subheading from '../../ui/Subheading'
 
-interface WorkoutListProps extends NavigationScreenProps {
+interface WorkoutListProps extends NavigationScreenProps, ActionsProps {
   workouts: Workout[]
-  onAddWorkoutClick: () => void
   onWorkoutClick: (id: string) => () => void
 }
 
@@ -20,7 +23,7 @@ interface ActionsProps {
 }
 
 const Title = () => (
-  <MyText><Text style={styles.title}>one<Text style={styles.bold}>more</Text>rep</Text></MyText>
+  <AppText><Text style={styles.title}>one<Text style={styles.bold}>more</Text>rep</Text></AppText>
 )
 
 const Actions = ({ onAddWorkoutClick }: ActionsProps) => (
@@ -32,14 +35,21 @@ const Actions = ({ onAddWorkoutClick }: ActionsProps) => (
   />
 )
 
+const Empty = () => (
+  <Section align="center">
+    <Heading>No workouts</Heading>
+    <Subheading>Click + at the top to add workouts.</Subheading>
+  </Section>
+)
+
 export default ({ workouts, onAddWorkoutClick, onWorkoutClick }: WorkoutListProps) => (
-  <View style={styles.container}>
+  <Container>
     <Header
       center={<Title />}
       right={<Actions onAddWorkoutClick={onAddWorkoutClick} />}
     />
     <FlatList
-      ListEmptyComponent={<Text style={styles.empty}><MyText>You have no workouts</MyText></Text>}
+      ListEmptyComponent={<Empty />}
       data={workouts}
       renderItem={({ item }) => (
         <ListItem
@@ -50,23 +60,12 @@ export default ({ workouts, onAddWorkoutClick, onWorkoutClick }: WorkoutListProp
       )}
       keyExtractor={(item) => item.id}
     />
-  </View>
+  </Container>
 )
 
 const styles = StyleSheet.create({
   bold:    {
     fontWeight:  'bold',
-  },
-  container: {
-    backgroundColor:  theme.palette.background,
-    flex: 1,
-  },
-  empty: {
-    alignSelf:  'center',
-    color: theme.palette.textSecondary,
-    fontFamily: 'System',
-    fontWeight: '600',
-    marginTop: theme.scale * 3,
   },
   title: {
     color:  '#fff',

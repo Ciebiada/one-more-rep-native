@@ -1,26 +1,26 @@
 import React from 'react'
 import { Alert, StyleSheet, TextInput, View } from 'react-native'
-import DateTimePicker from 'react-native-modal-datetime-picker'
 import { NavigationScreenProps } from 'react-navigation'
 import { Workout } from '../../../reducers/workouts'
 import theme from '../../../theme'
+import Container from '../../ui/Container'
 import DatePicker from '../../ui/DatePicker'
 import Header from '../../ui/Header'
 import IconButton from '../../ui/IconButton'
 import Section from '../../ui/Section'
 import ExerciseList from './ExerciseList'
 
-interface WorkoutListProps extends NavigationScreenProps {
-  workout: Workout
-  onAddExerciseClick: () => void
-  onDateChange: (date: string) => void
-  onDeleteWorkoutClick: () => void
-  onNameChange: (name: string) => void
-}
+interface WorkoutListProps extends NavigationScreenProps, ActionsProps, DetailsProps {}
 
 interface ActionsProps {
   onAddExerciseClick: () => void
   onDeleteWorkoutClick: () => void
+}
+
+interface DetailsProps {
+  workout: Workout
+  onDateChange: (date: string) => void
+  onNameChange: (name: string) => void
 }
 
 const deleteWorkoutModal = (deleteWorkout: () => void) => () => {
@@ -49,53 +49,50 @@ const Actions = ({ onDeleteWorkoutClick, onAddExerciseClick }: ActionsProps) => 
   </View>
 )
 
-export default ({
-  workout, onDateChange, onAddExerciseClick, onDeleteWorkoutClick, onNameChange, navigation,
-}: WorkoutListProps,
-) => (
-    workout ? (
-      <View style={styles.container}>
-        <Header
-          navigation={navigation}
-          right={<Actions onAddExerciseClick={onAddExerciseClick} onDeleteWorkoutClick={onDeleteWorkoutClick} />}
-        />
-        <Section>
-          <View style={styles.details}>
-            <TextInput
-              style={styles.name}
-              value={workout.name}
-              onChangeText={onNameChange}
-              placeholder="Name"
-              selectionColor={theme.palette.accent}
-              underlineColorAndroid="transparent"
-            />
-            <DatePicker
-              placeholder="Date"
-              date={workout.date}
-              onDateChange={onDateChange}
-            />
-          </View>
-        </Section>
-        <Section>
-          <ExerciseList workoutId={workout.id} />
-        </Section>
-      </View>
-    ) : <View style={styles.container}></View>
+const Details = ({workout, onNameChange, onDateChange}: DetailsProps) => (
+  <Section>
+    <View style={styles.details}>
+      <TextInput
+        style={styles.name}
+        value={workout.name}
+        onChangeText={onNameChange}
+        placeholder="Name"
+        selectionColor={theme.palette.accent}
+        underlineColorAndroid="transparent"
+      />
+      <DatePicker
+        placeholder="Date"
+        date={workout.date}
+        onDateChange={onDateChange}
+      />
+    </View>
+  </Section>
 )
+
+export default (props: WorkoutListProps) => {
+  const {navigation, workout} = props
+
+  return (
+    <Container>
+      <Header
+        navigation={navigation}
+        right={<Actions {...props} />}
+      />
+      {workout &&
+        <ExerciseList
+          header={<Details {...props} />}
+          workoutId={workout.id}
+        />}
+    </Container>
+  )
+}
 
 const styles = StyleSheet.create({
   actions: {
     flexDirection: 'row',
   },
-  bold: {
-    fontWeight: 'bold',
-  },
-  container: {
-    backgroundColor: theme.palette.background,
-    flex: 1,
-  },
   details: {
-    marginBottom: theme.scale * 2,
+    marginBottom: theme.scale * 3,
     marginTop: theme.scale,
   },
   icon: {

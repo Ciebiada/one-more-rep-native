@@ -1,12 +1,11 @@
 import React, { ReactNode } from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
-import theme from '../../theme'
+import { Platform, StyleSheet, Text } from 'react-native'
 
-interface MyTextProps {
+interface AppTextProps {
   children: ReactNode
 }
 
-export default ({ children }: MyTextProps) => (
+export default ({ children }: AppTextProps) => (
   <Text style={styles.myText}>
     {children}
   </Text>

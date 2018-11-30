@@ -1,14 +1,13 @@
 import { distanceInWordsToNow } from 'date-fns'
 import React, { Component } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import DateTimePicker from 'react-native-modal-datetime-picker'
-import theme from '../../theme'
-import MyText from './MyText'
+import Subheading from './Subheading'
 
 interface DatePickerProps {
   onDateChange: (date: string) => void
   date?: string
-  placeholder?: string
+  placeholder: string
 }
 
 interface State {
@@ -31,7 +30,9 @@ export default class DatePicker extends Component<DatePickerProps> {
     return (
       <View>
         <TouchableOpacity onPress={this.showDatePicker}>
-          <MyText><Text style={styles.date}>{date ? `${distanceInWordsToNow(date)} ago` : placeholder}</Text></MyText>
+          <Subheading>
+            {date ? `${distanceInWordsToNow(date)} ago` : placeholder}
+          </Subheading>
         </TouchableOpacity>
         <DateTimePicker
           isVisible={datePickerVisible}
@@ -51,10 +52,3 @@ export default class DatePicker extends Component<DatePickerProps> {
     this.hideDatePicker()
   }
 }
-
-const styles = StyleSheet.create({
-  date: {
-    color: theme.palette.textSecondary,
-    fontSize: 14,
-  },
-})

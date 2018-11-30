@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Exercise } from '../../../../../reducers/exercises'
 import theme from '../../../../../theme'
-import MyText from '../../../../ui/MyText'
+import AppText from '../../../../ui/AppText'
 
 interface ExercisePanelProps {
   exercise: Exercise
@@ -11,10 +11,10 @@ interface ExercisePanelProps {
 export default ({ exercise }: ExercisePanelProps) => (
   <View style={styles.container}>
     <Text style={styles.name}>
-      <MyText>Bench press</MyText>
+      <AppText>Bench press</AppText>
     </Text>
     <Text style={styles.placeholder}>
-      <MyText>No sets</MyText>
+      <AppText>No sets</AppText>
     </Text>
   </View>
 )
@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#444',
     borderRadius: 8,
     marginBottom: theme.scale * 2,
+    marginHorizontal: theme.scale * 2,
     padding: theme.scale * 2,
   },
   name: {

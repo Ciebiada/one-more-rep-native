@@ -4,11 +4,14 @@ import theme from '../../theme'
 
 interface SectionProps {
   children: ReactNode
+  align?: 'flex-start' | 'center' | 'flex-end'
 }
 
-export default ({ children }: SectionProps) => (
+export default ({ align = 'flex-start', children }: SectionProps) => (
   <View style={styles.section}>
-    {children}
+    <View style={{alignItems: align}}>
+      {children}
+    </View>
   </View>
 )
 

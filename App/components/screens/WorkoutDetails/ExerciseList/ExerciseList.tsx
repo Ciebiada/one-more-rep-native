@@ -1,18 +1,28 @@
-import React from 'react'
-import { FlatList, StyleSheet, Text } from 'react-native'
+import React, { ReactElement } from 'react'
+import { FlatList, StyleSheet } from 'react-native'
 import { Exercise } from '../../../../reducers/exercises'
-import theme from '../../../../theme'
-import MyText from '../../../ui/MyText'
+import Heading from '../../../ui/Heading'
+import Section from '../../../ui/Section'
+import Subheading from '../../../ui/Subheading'
 import ExercisePanel from './ExercisePanel/ExercisePanel'
 
 interface ExerciseListProps {
+  header?: ReactElement<any>
   exercises: Exercise[]
 }
 
-export default ({ exercises }: ExerciseListProps) => (
+const Empty = () => (
+  <Section align="center">
+    <Heading>No exercises</Heading>
+    <Subheading>Click + at the top to add exercises.</Subheading>
+  </Section>
+)
+
+export default ({ exercises, header }: ExerciseListProps) => (
   <FlatList
     style={styles.list}
-    ListEmptyComponent={<MyText><Text style={styles.empty}>No exercises yet</Text></MyText>}
+    ListHeaderComponent={header}
+    ListEmptyComponent={<Empty />}
     data={exercises}
     renderItem={({ item }) => <ExercisePanel key={item.id} exercise={item} />}
     keyExtractor={(item) => item.id}
@@ -20,11 +30,6 @@ export default ({ exercises }: ExerciseListProps) => (
 )
 
 const styles = StyleSheet.create({
-  empty: {
-    alignSelf: 'center',
-    color: theme.palette.textSecondary,
-    fontWeight: '600',
-  },
   list: {
     height: '100%',
   },
