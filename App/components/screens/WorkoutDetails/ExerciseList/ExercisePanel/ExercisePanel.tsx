@@ -3,6 +3,7 @@ import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 import { Exercise } from '../../../../../reducers/exercises'
 import theme from '../../../../../theme'
 import Heading from '../../../../ui/Heading'
+import Input from '../../../../ui/Input'
 import Subheading from '../../../../ui/Subheading'
 
 interface ExercisePanelProps {
@@ -14,8 +15,12 @@ interface ExercisePanelProps {
 export default ({ exercise, onPress, selected }: ExercisePanelProps) => (
   <TouchableWithoutFeedback onPress={onPress}>
     <View style={[styles.container, selected && styles.selected]}>
-      <Heading>Bench press</Heading>
-      <Subheading>No sets</Subheading>
+      <Input
+        value={exercise.name}
+        placeholder="Exercise name"
+        onFocus={onPress}
+        onChange={() => null}
+      />
       <Subheading>No sets</Subheading>
     </View>
   </TouchableWithoutFeedback>
@@ -30,14 +35,6 @@ const styles = StyleSheet.create({
     marginBottom: theme.scale * 2,
     marginHorizontal: theme.scale * 2,
     padding: theme.scale * 2,
-  },
-  name: {
-    color: theme.palette.text,
-    fontSize: 20,
-    marginBottom: theme.scale,
-  },
-  placeholder: {
-    color: theme.palette.textSecondary,
   },
   selected: {
     borderColor: theme.palette.accent,

@@ -53,7 +53,7 @@ export default ({ workouts, onAddWorkoutClick, onWorkoutClick }: WorkoutListProp
       data={workouts}
       renderItem={({ item }) => (
         <ListItem
-          header={item.name}
+          header={item.name || 'Workout name'}
           subheader={`${distanceInWordsToNow(item.date)} ago`}
           onPress={onWorkoutClick(item.id)}
         />

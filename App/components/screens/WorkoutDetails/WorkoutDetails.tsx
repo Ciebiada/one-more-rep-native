@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, StyleSheet, TextInput, View } from 'react-native'
+import { Alert, StyleSheet, View } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { Workout } from '../../../reducers/workouts'
 import theme from '../../../theme'
@@ -7,6 +7,7 @@ import Container from '../../ui/Container'
 import DatePicker from '../../ui/DatePicker'
 import Header from '../../ui/Header'
 import IconButton from '../../ui/IconButton'
+import Input from '../../ui/Input'
 import Section from '../../ui/Section'
 import ExerciseList from './ExerciseList'
 
@@ -52,13 +53,10 @@ const Actions = ({ onDeleteWorkoutClick, onAddExerciseClick }: ActionsProps) => 
 const Details = ({workout, onNameChange, onDateChange}: DetailsProps) => (
   <Section>
     <View style={styles.details}>
-      <TextInput
-        style={styles.name}
+      <Input
         value={workout.name}
-        onChangeText={onNameChange}
-        placeholder="Name"
-        selectionColor={theme.palette.accent}
-        underlineColorAndroid="transparent"
+        onChange={onNameChange}
+        placeholder="Workout name"
       />
       <DatePicker
         placeholder="Date"
@@ -94,13 +92,9 @@ const styles = StyleSheet.create({
   details: {
     marginBottom: theme.scale * 3,
     marginTop: theme.scale,
+    width: '100%',
   },
   icon: {
     marginLeft: theme.scale * 2,
-  },
-  name: {
-    color: theme.palette.text,
-    fontSize: 18,
-    fontWeight: '500',
   },
 })

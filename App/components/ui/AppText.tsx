@@ -6,13 +6,13 @@ interface AppTextProps {
 }
 
 export default ({ children }: AppTextProps) => (
-  <Text style={styles.myText}>
+  <Text style={styles.appText}>
     {children}
   </Text>
 )
 
 const styles = StyleSheet.create({
-  myText: {
+  appText: {
     fontFamily: Platform.OS === 'ios' ? 'System' : 'Roboto',
   },
 })
