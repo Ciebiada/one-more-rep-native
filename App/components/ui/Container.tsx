@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet } from 'react-native'
 import theme from '../../theme'
 
 interface ContainerProps {
@@ -7,9 +7,9 @@ interface ContainerProps {
 }
 
 export default ({ children }: ContainerProps) => (
-  <View style={styles.container}>
+  <KeyboardAvoidingView style={styles.container} behavior="padding">
     {children}
-  </View>
+  </KeyboardAvoidingView>
 )
 
 const styles = StyleSheet.create({
