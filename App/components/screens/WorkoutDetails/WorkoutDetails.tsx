@@ -38,14 +38,13 @@ const Actions = ({ onDeleteWorkoutClick, onAddExerciseClick }: ActionsProps) => 
       size={32}
       color={theme.palette.textSecondary}
       onPress={deleteWorkoutModal(onDeleteWorkoutClick)}
-      style={styles.icon}
     />
     <IconButton
       iconName="plus-circle-outline"
       color={theme.palette.accent}
       size={32}
       onPress={onAddExerciseClick}
-      style={styles.icon}
+      marginLeft={theme.scale * 2}
     />
   </View>
 )
@@ -93,8 +92,5 @@ const styles = StyleSheet.create({
     marginBottom: theme.scale * 3,
     marginTop: theme.scale,
     width: '100%',
-  },
-  icon: {
-    marginLeft: theme.scale * 2,
   },
 })
