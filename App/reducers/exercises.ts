@@ -16,6 +16,12 @@ const byId = (state: { [id: string]: Exercise } = {}, action: ExercisesAction) =
   switch (action.type) {
     case getType(exercises.addExercise):
       return R.assoc(action.payload.exercise.id, action.payload.exercise, state)
+    case getType(exercises.updateExercise):
+      return R.assoc(
+        action.payload.id,
+        R.merge(state[action.payload.id], action.payload.props),
+        state,
+      )
     default:
       return state
   }

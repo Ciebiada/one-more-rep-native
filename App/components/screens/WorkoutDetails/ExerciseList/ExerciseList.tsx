@@ -11,7 +11,8 @@ interface ExerciseListProps {
   exercises: Exercise[]
   header?: ReactElement<any>
   offExercisePress: () => void
-  onExercisePress: (id: string) => void
+  onExerciseNameChange: (id: string) => (name: string) => void
+  onExercisePress: (id: string) => () => void
   selectedExercise: string | null
 }
 
@@ -22,7 +23,9 @@ const Empty = () => (
   </Section>
 )
 
-export default ({ exercises, header, offExercisePress, onExercisePress, selectedExercise }: ExerciseListProps) => (
+export default ({
+  exercises, header, offExercisePress, onExerciseNameChange, onExercisePress, selectedExercise,
+}: ExerciseListProps) => (
   <TouchableWithoutFeedback onPress={offExercisePress}>
     <View style={styles.wrapper}>
       <FlatList
@@ -34,7 +37,8 @@ export default ({ exercises, header, offExercisePress, onExercisePress, selected
           <ExercisePanel
             key={item.id}
             exercise={item}
-            onPress={() => onExercisePress(item.id)}
+            onPress={onExercisePress(item.id)}
+            onNameChange={onExerciseNameChange(item.id)}
             selected={selectedExercise === item.id}
           />
         }

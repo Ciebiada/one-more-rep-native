@@ -2,24 +2,24 @@ import React from 'react'
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 import { Exercise } from '../../../../../reducers/exercises'
 import theme from '../../../../../theme'
-import Heading from '../../../../ui/Heading'
 import Input from '../../../../ui/Input'
 import Subheading from '../../../../ui/Subheading'
 
 interface ExercisePanelProps {
   exercise: Exercise
   onPress: () => void
+  onNameChange: (name: string) => void
   selected?: boolean
 }
 
-export default ({ exercise, onPress, selected }: ExercisePanelProps) => (
+export default ({ exercise, onPress, onNameChange, selected }: ExercisePanelProps) => (
   <TouchableWithoutFeedback onPress={onPress}>
     <View style={[styles.container, selected && styles.selected]}>
       <Input
         value={exercise.name}
         placeholder="Exercise name"
         onFocus={onPress}
-        onChange={() => null}
+        onChange={onNameChange}
       />
       <Subheading>No sets</Subheading>
     </View>
