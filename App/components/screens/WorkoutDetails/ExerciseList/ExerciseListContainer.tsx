@@ -1,9 +1,8 @@
-import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { deselectExercise, selectExercise, updateExercise } from '../../../../actions/exercises'
+import { selectExercise, updateExercise } from '../../../../actions/exercises'
 import { RootState } from '../../../../reducers'
-import { Exercise, getExercises } from '../../../../reducers/exercises'
+import { getExercises } from '../../../../reducers/exercises'
 import ExerciseList from './ExerciseList'
 
 interface OwnProps {
@@ -16,9 +15,6 @@ const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  offExercisePress: () => {
-    dispatch(deselectExercise())
-  },
   onExerciseNameChange: (id: string) => (name: string) => {
     dispatch(updateExercise(id, {name}))
   },
