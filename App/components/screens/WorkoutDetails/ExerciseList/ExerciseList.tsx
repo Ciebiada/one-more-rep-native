@@ -1,14 +1,18 @@
 import React, { ReactElement } from 'react'
-import { FlatList, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 import { Exercise } from '../../../../reducers/exercises'
+import theme from '../../../../theme'
 import Heading from '../../../ui/Heading'
 import Section from '../../../ui/Section'
 import Subheading from '../../../ui/Subheading'
 import ExercisePanel from './ExercisePanel/ExercisePanel'
 
 interface ExerciseListProps {
-  header?: ReactElement<any>
   exercises: Exercise[]
+  header?: ReactElement<any>
+  offExercisePress: () => void
+  onExercisePress: (id: string) => void
+  selectedExercise: string | null
 }
 
 const Empty = () => (
@@ -18,19 +22,33 @@ const Empty = () => (
   </Section>
 )
 
-export default ({ exercises, header }: ExerciseListProps) => (
-  <FlatList
-    style={styles.list}
-    ListHeaderComponent={header}
-    ListEmptyComponent={<Empty />}
-    data={exercises}
-    renderItem={({ item }) => <ExercisePanel key={item.id} exercise={item} />}
-    keyExtractor={(item) => item.id}
-  />
+export default ({ exercises, header, offExercisePress, onExercisePress, selectedExercise }: ExerciseListProps) => (
+  <TouchableWithoutFeedback onPress={offExercisePress}>
+    <View style={styles.wrapper}>
+      <FlatList
+        ListHeaderComponent={header}
+        ListEmptyComponent={<Empty />}
+        ListFooterComponent={<View style={styles.footer}/>}
+        data={exercises}
+        renderItem={({ item }) =>
+          <ExercisePanel
+            key={item.id}
+            exercise={item}
+            onPress={() => onExercisePress(item.id)}
+            selected={selectedExercise === item.id}
+          />
+        }
+        keyExtractor={(item) => item.id}
+      />
+    </View>
+  </TouchableWithoutFeedback>
 )
 
 const styles = StyleSheet.create({
-  list: {
-    height: '100%',
+  footer: {
+    height: theme.scale * 8,
+  },
+  wrapper: {
+    flex: 1,
   },
 })

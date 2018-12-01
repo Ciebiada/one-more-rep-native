@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import { ActionType, getType } from 'typesafe-actions'
 import { RootState } from '.'
 import * as exercises from '../actions/exercises'
+import { selectExercise } from './../actions/exercises'
 
 export interface Exercise {
   id: string
@@ -29,10 +30,22 @@ const allIds = (state: string[] = [], action: ExercisesAction) => {
   }
 }
 
+const selectedExercise = (state: string | null = null, action: ExercisesAction) => {
+  switch (action.type) {
+    case getType(exercises.selectExercise):
+      return action.payload.id
+    case getType(exercises.deselectExercise):
+      return null
+    default:
+      return state
+  }
+}
+
 export const getExercises = (state: RootState, workoutId: string) =>
   state.workouts.byId[workoutId].exercises.map((id) => state.exercises.byId[id])
 
 export default combineReducers({
   allIds,
   byId,
+  selectedExercise,
 })

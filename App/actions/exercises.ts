@@ -9,3 +9,11 @@ export const addExercise = createAction('exercises/ADD', (resolve) =>
     workoutId,
   }),
 )
+
+export const selectExercise = createAction('exercises/SELECT', (resolve) =>
+  (id: string) => resolve({ id }),
+)
+
+export const deselectExercise = createAction('exercises/DESELECT', (resolve) =>
+  () => resolve(),
+)
