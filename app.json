@@ -21,7 +21,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ciebiada.onemorerep"
+    },
+    "android": {
+      "package": "com.ciebiada.onemorerep"
     },
     "packagerOpts": {
       "sourceExts": [
