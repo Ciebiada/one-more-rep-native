@@ -31,7 +31,6 @@ export default ({
       ListEmptyComponent={<Empty />}
       data={exercises}
       keyboardShouldPersistTaps="handled"
-      keyboardDismissMode="on-drag"
       renderItem={({ item, move, moveEnd }) =>
         <TouchableOpacity
           onLongPress={move}
