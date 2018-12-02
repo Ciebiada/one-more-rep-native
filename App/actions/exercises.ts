@@ -11,13 +11,12 @@ export const addExercise = createAction('exercises/ADD', (resolve) =>
   }),
 )
 
-export const selectExercise = createAction('exercises/SELECT', (resolve) =>
-  (id: string) => resolve({ id }),
-)
-
-export const deselectExercise = createAction('exercises/DESELECT', (resolve) =>
-  () => resolve(),
-)
+export const removeExercise = createAction('exercises/REMOVE', (resolve) =>
+  (workoutId: string, exerciseId: string) => resolve({
+    exerciseId,
+    workoutId,
+  }),
+ )
 
 export const updateExercise = createAction('exercises/UPDATE', (resolve) =>
   (id: string, props: Partial<Exercise>) => resolve({id, props}),

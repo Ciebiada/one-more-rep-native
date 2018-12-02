@@ -35,14 +35,14 @@ const Actions = ({ onDeleteWorkoutClick, onAddExerciseClick }: ActionsProps) => 
   <View style={styles.actions}>
     <IconButton
       iconName="delete"
-      size={32}
+      size={theme.scale * 4}
       color={theme.palette.textSecondary}
       onPress={deleteWorkoutModal(onDeleteWorkoutClick)}
     />
     <IconButton
       iconName="plus-circle-outline"
       color={theme.palette.accent}
-      size={32}
+      size={theme.scale * 4}
       onPress={onAddExerciseClick}
       marginLeft={theme.scale * 2}
     />

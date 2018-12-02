@@ -32,6 +32,12 @@ const byId = (state: { [id: string]: Workout } = {}, action: WorkoutsAction) => 
         R.append(action.payload.exercise.id, state[action.payload.workoutId].exercises),
         state,
       )
+    case getType(exercises.removeExercise):
+      return R.assocPath(
+        [action.payload.workoutId, 'exercises'],
+        R.without([action.payload.exerciseId], state[action.payload.workoutId].exercises),
+        state,
+      )
     default:
       return state
   }

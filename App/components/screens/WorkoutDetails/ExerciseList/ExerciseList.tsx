@@ -10,7 +10,7 @@ interface ExerciseListProps {
   exercises: Exercise[]
   header?: ReactElement<any>
   onExerciseNameChange: (id: string) => (name: string) => void
-  onExercisePress: (id: string) => () => void
+  onExerciseRemove: (id: string) => () => void
   selectedExercise: string | null
 }
 
@@ -22,17 +22,19 @@ const Empty = () => (
 )
 
 export default ({
-  exercises, header, onExerciseNameChange, onExercisePress, selectedExercise,
+  exercises, header, onExerciseNameChange, onExerciseRemove, selectedExercise,
 }: ExerciseListProps) => (
     <FlatList
       ListHeaderComponent={header}
       ListEmptyComponent={<Empty />}
       data={exercises}
+      keyboardShouldPersistTaps="handled"
+      keyboardDismissMode="on-drag"
       renderItem={({ item }) =>
         <ExercisePanel
           key={item.id}
           exercise={item}
-          onPress={onExercisePress(item.id)}
+          onRemove={onExerciseRemove(item.id)}
           onNameChange={onExerciseNameChange(item.id)}
           selected={selectedExercise === item.id}
         />

@@ -1,47 +1,50 @@
 import React from 'react'
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
+import { Alert, StyleSheet, View } from 'react-native'
 import { Exercise } from '../../../../../reducers/exercises'
 import theme from '../../../../../theme'
 import IconButton from '../../../../ui/IconButton'
 import Input from '../../../../ui/Input'
 import Subheading from '../../../../ui/Subheading'
 
-interface ExercisePanelProps {
+interface ExercisePanelProps extends ActionsProps {
   exercise: Exercise
-  onPress: () => void
   onNameChange: (name: string) => void
   selected?: boolean
 }
 
-const Actions = () => (
+interface ActionsProps {
+  onRemove: () => void
+}
+
+const deleteExerciseModal = (deleteExercise: () => void) => () => {
+  Alert.alert('Delete exercise', 'Are you sure?', [
+    {text: 'Cancel', style: 'cancel'},
+    {text: 'Delete', onPress: deleteExercise, style: 'destructive'},
+  ])
+}
+
+const Actions = ({ onRemove }: ActionsProps) => (
   <View style={styles.actions}>
     <IconButton
       iconName="delete"
       size={theme.scale * 3}
       color={theme.palette.textSecondary}
-      onPress={() => null}
+      onPress={deleteExerciseModal(onRemove)}
       marginLeft={theme.scale}
     />
   </View>
 )
 
-const ActionsPlaceholder = () => (
-  <View style={styles.actions}></View>
-)
-
-export default ({ exercise, onPress, onNameChange, selected }: ExercisePanelProps) => (
-  <TouchableWithoutFeedback onPress={onPress}>
-    <View style={[styles.container, selected && styles.selected]}>
-      <Input
-        value={exercise.name}
-        placeholder="Exercise name"
-        onFocus={onPress}
-        onChange={onNameChange}
-      />
-      <Subheading>No sets</Subheading>
-      {selected ? <Actions/> : <ActionsPlaceholder/>}
-    </View>
-  </TouchableWithoutFeedback>
+export default ({ exercise, onRemove, onNameChange }: ExercisePanelProps) => (
+  <View style={styles.container}>
+    <Input
+      value={exercise.name}
+      placeholder="Exercise name"
+      onChange={onNameChange}
+    />
+    <Subheading>No sets</Subheading>
+    <Actions onRemove={onRemove} />
+  </View>
 )
 
 const styles = StyleSheet.create({
@@ -52,16 +55,11 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: '#444',
-    borderColor: '#444',
     borderRadius: 8,
-    borderWidth: 2,
     marginBottom: theme.scale * 2,
     marginHorizontal: theme.scale * 2,
     paddingBottom: theme.scale,
     paddingHorizontal: theme.scale * 2,
     paddingTop: theme.scale * 2,
-  },
-  selected: {
-    borderColor: theme.palette.accent,
   },
 })

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { selectExercise, updateExercise } from '../../../../actions/exercises'
+import { removeExercise, updateExercise } from '../../../../actions/exercises'
 import { RootState } from '../../../../reducers'
 import { getExercises } from '../../../../reducers/exercises'
 import ExerciseList from './ExerciseList'
@@ -11,15 +11,14 @@ interface OwnProps {
 
 const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
   exercises: getExercises(state, ownProps.workoutId),
-  selectedExercise: state.exercises.selectedExercise,
 })
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => ({
   onExerciseNameChange: (id: string) => (name: string) => {
     dispatch(updateExercise(id, {name}))
   },
-  onExercisePress: (id: string) => () => {
-    dispatch(selectExercise(id))
+  onExerciseRemove: (id: string) => () => {
+    dispatch(removeExercise(ownProps.workoutId, id))
   },
 })
 
