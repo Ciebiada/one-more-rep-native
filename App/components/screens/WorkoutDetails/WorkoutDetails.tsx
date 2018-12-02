@@ -53,8 +53,9 @@ const Details = ({workout, onNameChange, onDateChange}: DetailsProps) => (
   <Section>
     <View style={styles.details}>
       <Input
+        header={true}
         value={workout.name}
-        onChange={onNameChange}
+        onChangeText={onNameChange}
         placeholder="Workout name"
       />
       <DatePicker

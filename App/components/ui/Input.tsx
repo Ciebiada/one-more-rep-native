@@ -1,22 +1,15 @@
 import React from 'react'
-import { StyleSheet, TextInput } from 'react-native'
+import { StyleSheet, TextInput, TextInputProps } from 'react-native'
 import theme from '../../theme'
 
-interface InputProps {
-  value: string
-  onChange: (text: string) => void
-  onFocus?: () => void
-  placeholder: string
+interface InputProps extends TextInputProps {
+  header?: boolean
 }
 
-export default ({ value, onChange, placeholder, onFocus }: InputProps) => (
+export default ({ header, ...props }: InputProps) => (
   <TextInput
-    autoFocus={!value}
-    style={styles.input}
-    value={value}
-    onChangeText={onChange}
-    onFocus={onFocus}
-    placeholder={placeholder}
+    style={[styles.input, header && styles.header]}
+    {...props}
     selectionColor={theme.palette.accent}
     underlineColorAndroid="transparent"
     placeholderTextColor={theme.palette.textSecondary}
@@ -24,9 +17,12 @@ export default ({ value, onChange, placeholder, onFocus }: InputProps) => (
 )
 
 const styles = StyleSheet.create({
+  header: {
+    fontSize: 22,
+    fontWeight: '500',
+  },
   input: {
     color: theme.palette.text,
     fontSize: 18,
-    fontWeight: '500',
   },
 })

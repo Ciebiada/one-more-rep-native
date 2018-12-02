@@ -16,6 +16,6 @@ export default ({ children }: SubheadingProps) => (
 const styles = StyleSheet.create({
   subheading: {
     color: theme.palette.textSecondary,
-    fontSize: 14,
+    fontSize: 16,
   },
 })

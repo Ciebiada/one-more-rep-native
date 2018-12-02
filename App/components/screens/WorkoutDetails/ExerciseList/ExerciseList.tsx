@@ -13,7 +13,6 @@ interface ExerciseListProps {
   header?: ReactElement<any>
   onExerciseNameChange: (id: string) => (name: string) => void
   onExerciseRemove: (id: string) => () => void
-  selectedExercise: string | null
   onOrderChange: (exercises: string[]) => void
 }
 
@@ -25,7 +24,7 @@ const Empty = () => (
 )
 
 export default ({
-  exercises, header, onExerciseNameChange, onExerciseRemove, onOrderChange, selectedExercise,
+  exercises, header, onExerciseNameChange, onExerciseRemove, onOrderChange,
 }: ExerciseListProps) => (
     <DraggableFlatList
       ListHeaderComponent={header}
@@ -34,15 +33,17 @@ export default ({
       keyboardShouldPersistTaps="handled"
       keyboardDismissMode="on-drag"
       renderItem={({ item, move, moveEnd }) =>
-        <ExercisePanel
-          key={item.id}
-          exercise={item}
-          onMove={move}
-          onMoveEnd={moveEnd}
-          onRemove={onExerciseRemove(item.id)}
-          onNameChange={onExerciseNameChange(item.id)}
-          selected={selectedExercise === item.id}
-        />
+        <TouchableOpacity
+          onLongPress={move}
+          onPressOut={moveEnd}
+        >
+          <ExercisePanel
+            key={item.id}
+            exercise={item}
+            onRemove={onExerciseRemove(item.id)}
+            onNameChange={onExerciseNameChange(item.id)}
+          />
+        </TouchableOpacity>
       }
       onMoveEnd={({ data }) => onOrderChange(data.map(R.prop('id')))}
       keyExtractor={(item) => item.id}

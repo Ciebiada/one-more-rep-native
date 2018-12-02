@@ -16,7 +16,7 @@ export default ({ children }: HeadingProps) => (
 const styles = StyleSheet.create({
   heading: {
     color: theme.palette.text,
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: '500',
   },
 })

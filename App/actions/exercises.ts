@@ -6,6 +6,7 @@ export const addExercise = createAction('exercises/ADD', (resolve) =>
     exercise: {
       id: new Date().toJSON(),
       name: '',
+      sets: [],
     },
     workoutId,
   }),
