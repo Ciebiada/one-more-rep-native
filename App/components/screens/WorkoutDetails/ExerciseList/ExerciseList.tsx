@@ -1,5 +1,7 @@
+import * as R from 'ramda'
 import React, { ReactElement } from 'react'
-import { FlatList } from 'react-native'
+import { TouchableOpacity } from 'react-native'
+import DraggableFlatList from 'react-native-draggable-flatlist'
 import { Exercise } from '../../../../reducers/exercises'
 import Heading from '../../../ui/Heading'
 import Section from '../../../ui/Section'
@@ -12,6 +14,7 @@ interface ExerciseListProps {
   onExerciseNameChange: (id: string) => (name: string) => void
   onExerciseRemove: (id: string) => () => void
   selectedExercise: string | null
+  onOrderChange: (exercises: string[]) => void
 }
 
 const Empty = () => (
@@ -22,23 +25,26 @@ const Empty = () => (
 )
 
 export default ({
-  exercises, header, onExerciseNameChange, onExerciseRemove, selectedExercise,
+  exercises, header, onExerciseNameChange, onExerciseRemove, onOrderChange, selectedExercise,
 }: ExerciseListProps) => (
-    <FlatList
+    <DraggableFlatList
       ListHeaderComponent={header}
       ListEmptyComponent={<Empty />}
       data={exercises}
       keyboardShouldPersistTaps="handled"
       keyboardDismissMode="on-drag"
-      renderItem={({ item }) =>
-        <ExercisePanel
-          key={item.id}
-          exercise={item}
-          onRemove={onExerciseRemove(item.id)}
-          onNameChange={onExerciseNameChange(item.id)}
-          selected={selectedExercise === item.id}
-        />
+      renderItem={({ item, move }) =>
+        <TouchableOpacity onLongPress={move}>
+          <ExercisePanel
+            key={item.id}
+            exercise={item}
+            onRemove={onExerciseRemove(item.id)}
+            onNameChange={onExerciseNameChange(item.id)}
+            selected={selectedExercise === item.id}
+          />
+        </TouchableOpacity>
       }
+      onMoveEnd={({ data }) => onOrderChange(data.map(R.prop('id')))}
       keyExtractor={(item) => item.id}
     />
 )

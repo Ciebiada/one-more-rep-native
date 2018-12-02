@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { removeExercise, updateExercise } from '../../../../actions/exercises'
+import { updateWorkout } from '../../../../actions/workouts'
 import { RootState } from '../../../../reducers'
 import { getExercises } from '../../../../reducers/exercises'
 import ExerciseList from './ExerciseList'
@@ -19,6 +20,9 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => ({
   },
   onExerciseRemove: (id: string) => () => {
     dispatch(removeExercise(ownProps.workoutId, id))
+  },
+  onOrderChange: (exercises: string[]) => {
+    dispatch(updateWorkout(ownProps.workoutId, {exercises}))
   },
 })
 
