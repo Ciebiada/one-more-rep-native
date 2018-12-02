@@ -33,16 +33,16 @@ export default ({
       data={exercises}
       keyboardShouldPersistTaps="handled"
       keyboardDismissMode="on-drag"
-      renderItem={({ item, move }) =>
-        <TouchableOpacity onLongPress={move}>
-          <ExercisePanel
-            key={item.id}
-            exercise={item}
-            onRemove={onExerciseRemove(item.id)}
-            onNameChange={onExerciseNameChange(item.id)}
-            selected={selectedExercise === item.id}
-          />
-        </TouchableOpacity>
+      renderItem={({ item, move, moveEnd }) =>
+        <ExercisePanel
+          key={item.id}
+          exercise={item}
+          onMove={move}
+          onMoveEnd={moveEnd}
+          onRemove={onExerciseRemove(item.id)}
+          onNameChange={onExerciseNameChange(item.id)}
+          selected={selectedExercise === item.id}
+        />
       }
       onMoveEnd={({ data }) => onOrderChange(data.map(R.prop('id')))}
       keyExtractor={(item) => item.id}

@@ -13,6 +13,8 @@ interface ExercisePanelProps extends ActionsProps {
 }
 
 interface ActionsProps {
+  onMove: () => void
+  onMoveEnd: () => void
   onRemove: () => void
 }
 
@@ -23,19 +25,31 @@ const deleteExerciseModal = (deleteExercise: () => void) => () => {
   ])
 }
 
-const Actions = ({ onRemove }: ActionsProps) => (
+const Actions = ({ onRemove, onMove, onMoveEnd }: ActionsProps) => (
   <View style={styles.actions}>
+    <View style={styles.left}></View>
+    <View style={styles.center}>
     <IconButton
-      iconName="delete"
-      size={theme.scale * 3}
-      color={theme.palette.textSecondary}
-      onPress={deleteExerciseModal(onRemove)}
-      marginLeft={theme.scale}
-    />
+        iconName="drag-horizontal"
+        size={theme.scale * 3}
+        color={theme.palette.textSecondary}
+        onPressIn={onMove}
+        onPressOut={onMoveEnd}
+      />
+    </View>
+    <View style={styles.right}>
+      <IconButton
+        iconName="delete"
+        size={theme.scale * 3}
+        color={theme.palette.textSecondary}
+        onPress={deleteExerciseModal(onRemove)}
+        marginLeft={theme.scale}
+      />
+    </View>
   </View>
 )
 
-export default ({ exercise, onRemove, onNameChange }: ExercisePanelProps) => (
+export default ({ exercise, onMove, onMoveEnd, onRemove, onNameChange }: ExercisePanelProps) => (
   <View style={styles.container}>
     <Input
       value={exercise.name}
@@ -43,7 +57,7 @@ export default ({ exercise, onRemove, onNameChange }: ExercisePanelProps) => (
       onChange={onNameChange}
     />
     <Subheading>No sets</Subheading>
-    <Actions onRemove={onRemove} />
+    <Actions onMove={onMove} onMoveEnd={onMoveEnd} onRemove={onRemove} />
   </View>
 )
 
@@ -51,7 +65,11 @@ const styles = StyleSheet.create({
   actions: {
     flexDirection: 'row',
     height: theme.scale * 3,
-    justifyContent: 'flex-end',
+  },
+  center: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   container: {
     backgroundColor: '#444',
@@ -61,5 +79,14 @@ const styles = StyleSheet.create({
     paddingBottom: theme.scale,
     paddingHorizontal: theme.scale * 2,
     paddingTop: theme.scale * 2,
+  },
+  left: {
+    flex: 4,
+    flexDirection: 'row',
+  },
+  right: {
+    flex: 4,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 })
