@@ -1,5 +1,4 @@
 declare module 'react-native-draggable-flatlist' {
-  import React, { ReactNode } from 'react'
   import { FlatListProps } from 'react-native'
 
   interface RenderItemProps<T> {
@@ -8,12 +7,6 @@ declare module 'react-native-draggable-flatlist' {
     move: () => void
     moveEnd: () => void
     isActive: boolean
-
-    separators: {
-      highlight: () => void
-      unhighlight: () => void
-      updateProps: (select: 'leading' | 'trailing', newProps: any) => void
-    }
   }
 
   interface OnMoveEndProps<T> {
@@ -23,16 +16,8 @@ declare module 'react-native-draggable-flatlist' {
     row: T
   }
 
-  export interface DraggableFlatListProps<T> {
-    data: T[] | null
+  export type DraggableFlatListProps<T> = Pick<FlatListProps<T>, Exclude<keyof FlatListProps<T>, 'renderItem'>> & {
     renderItem: (props: RenderItemProps<T>) => React.ReactElement<any> | null
-    ListHeaderComponent?: React.ComponentType<any> | React.ReactElement<any> | null;
-    ListEmptyComponent?: React.ComponentType<any> | React.ReactElement<any> | null;
-    keyExtractor?: (item: T, index: number) => string;
-    horizontal?: boolean
-    scrollPercent?: number
-    keyboardDismissMode?: "none" | "interactive" | "on-drag";
-    keyboardShouldPersistTaps?: boolean | "always" | "never" | "handled";
     onMoveEnd?: (props: OnMoveEndProps<T>) => void
     onMoveBegin?: (index: number) => void
   }
