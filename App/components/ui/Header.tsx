@@ -6,6 +6,7 @@ import IconButton from './IconButton'
 
 interface HeaderProps {
   center?: ReactNode
+  left?: ReactNode
   navigation?: NavigationScreenProp<NavigationRoute<NavigationParams>, NavigationParams>
   right?: ReactNode
 }
@@ -23,12 +24,14 @@ const GoBack = ({navigation}: GoBackProps) => (
   />
 )
 
-export default ({center, navigation, right}: HeaderProps) => (
+export default ({center, left, navigation, right}: HeaderProps) => (
   <SafeAreaView>
     <StatusBar barStyle="light-content" />
     <View style={styles.header}>
       <View style={styles.left}>
-        {navigation && <GoBack navigation={navigation} />}
+        {navigation
+          ? <GoBack navigation={navigation} />
+          : left}
       </View>
       <View style={styles.center}>{center}</View>
       <View style={styles.right}>{right}</View>

@@ -1,6 +1,6 @@
 import { distanceInWordsToNow } from 'date-fns'
 import React from 'react'
-import { FlatList, StyleSheet, Text } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { Workout } from '../../../reducers/workouts'
 import theme from '../../../theme'
@@ -23,7 +23,9 @@ interface ActionsProps {
 }
 
 const Title = () => (
-  <AppText><Text style={styles.title}>one<Text style={styles.bold}>more</Text>rep</Text></AppText>
+  <View style={styles.logo}>
+    <AppText><Text style={styles.title}>one<Text style={styles.bold}>more</Text>rep</Text></AppText>
+  </View >
 )
 
 const Actions = ({ onAddWorkoutClick }: ActionsProps) => (
@@ -45,6 +47,7 @@ const Empty = () => (
 export default ({ workouts, onAddWorkoutClick, onWorkoutClick }: WorkoutListProps) => (
   <Container>
     <Header
+      left={<IconButton iconName="tune" size={32} color={theme.palette.separator} />}
       center={<Title />}
       right={<Actions onAddWorkoutClick={onAddWorkoutClick} />}
     />
@@ -64,13 +67,16 @@ export default ({ workouts, onAddWorkoutClick, onWorkoutClick }: WorkoutListProp
 )
 
 const styles = StyleSheet.create({
-  bold:    {
+  bold: {
     fontWeight:  'bold',
+  },
+  logo: {
+    paddingBottom: 7,
   },
   title: {
     color:  '#fff',
     fontSize: 24,
     fontWeight: '300',
-    paddingBottom: 6,
+    paddingBottom: 16,
   },
 })
