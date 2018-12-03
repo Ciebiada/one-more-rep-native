@@ -11,10 +11,10 @@ interface SetProps {
   set: Set
 }
 
-const toNumber = (text: string) => {
-  if (R.isEmpty(text)) { return undefined }
+const toNumber = (text?: string) => {
+  if (!text || R.isEmpty(text)) { return undefined }
 
-  return Number(text)
+  return Number(text.replace(',', '.'))
 }
 
 const toInputText = (value?: number) => {
@@ -23,13 +23,20 @@ const toInputText = (value?: number) => {
   return String(value)
 }
 
+const updateIfChanged = (update: (value: number) => void, oldValue?: number) => (text?: string) => {
+  const newValue = toNumber(text)
+  if (newValue && newValue !== oldValue) {
+    update(newValue)
+  }
+}
+
 export default ({set, onWeightUpdate, onRepsUpdate}: SetProps) => (
   <View style={styles.container}>
     <View style={styles.column}>
       <Input
         keyboardType="numeric"
         value={toInputText(set.weight)}
-        onChangeText={(text) => onWeightUpdate(toNumber(text))}
+        onChangeText={updateIfChanged(onWeightUpdate, set.weight)}
         placeholder="Weight"
       />
     </View>
@@ -37,7 +44,7 @@ export default ({set, onWeightUpdate, onRepsUpdate}: SetProps) => (
       <Input
         keyboardType="numeric"
         value={toInputText(set.reps)}
-        onChangeText={(text) => onRepsUpdate(toNumber(text))}
+        onChangeText={updateIfChanged(onRepsUpdate, set.reps)}
         placeholder="Reps"
       />
     </View>
