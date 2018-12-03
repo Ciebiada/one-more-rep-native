@@ -55,9 +55,7 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: '#444',
-    borderRadius: 8,
     marginBottom: theme.scale * 2,
-    marginHorizontal: theme.scale * 2,
     paddingBottom: theme.scale,
     paddingHorizontal: theme.scale * 2,
     paddingTop: theme.scale * 2,
