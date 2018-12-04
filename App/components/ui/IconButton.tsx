@@ -16,7 +16,7 @@ interface IconButtonProps {
 }
 
 export default ({
-  color, marginRight, marginLeft, iconName, onPress, onPressIn, onPressOut, size = 24, style,
+  color = 'white', marginRight, marginLeft, iconName, onPress, onPressIn, onPressOut, size = 24, style,
 }: IconButtonProps) => (
     <TouchableOpacity
       onPressIn={onPressIn}
@@ -24,6 +24,6 @@ export default ({
       onPress={onPress}
       style={[style, { marginRight, marginLeft }]}
     >
-      <Icon name={iconName} size={size} color={color ? color : 'white'} />
+      <Icon name={iconName} size={size} color={color} />
     </TouchableOpacity>
 )
