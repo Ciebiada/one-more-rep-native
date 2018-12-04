@@ -34,10 +34,17 @@ const deleteWorkoutModal = (deleteWorkout: () => void) => () => {
 const Actions = ({ onDeleteWorkoutClick, onAddExerciseClick }: ActionsProps) => (
   <View style={styles.actions}>
     <IconButton
+      iconName="content-copy"
+      size={theme.scale * 4}
+      color={theme.palette.textSecondary}
+      onPress={() => null}
+    />
+    <IconButton
       iconName="delete"
       size={theme.scale * 4}
       color={theme.palette.textSecondary}
       onPress={deleteWorkoutModal(onDeleteWorkoutClick)}
+      marginLeft={theme.scale * 2}
     />
     <IconButton
       iconName="plus-circle-outline"
