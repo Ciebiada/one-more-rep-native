@@ -15,7 +15,7 @@
     "ramda": "^0.25.0",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
-    "react-native-draggable-flatlist": "^1.1.5",
+    "react-native-draggable-flatlist": "github:Ciebiada/react-native-draggable-flatlist",
     "react-native-modal-datetime-picker": "^6.0.0",
     "react-native-vector-icons": "^6.0.2",
     "react-navigation": "^2.18.2",
