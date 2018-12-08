@@ -12,6 +12,7 @@ interface ExercisePanelProps extends ActionsProps {
 }
 
 interface ActionsProps {
+  onDrag: () => void
   onRemove: () => void
 }
 
@@ -22,18 +23,25 @@ const deleteExerciseModal = (deleteExercise: () => void) => () => {
   ])
 }
 
-const Actions = ({ onRemove }: ActionsProps) => (
+const Actions = ({ onDrag, onRemove }: ActionsProps) => (
   <View style={styles.actions}>
+    <IconButton
+      iconName="drag"
+      size={theme.scale * 3}
+      color={theme.palette.textSecondary}
+      onPressIn={onDrag}
+    />
     <IconButton
       iconName="delete"
       size={theme.scale * 3}
       color={theme.palette.textSecondary}
       onPress={deleteExerciseModal(onRemove)}
+      marginLeft={theme.scale * 2}
     />
   </View>
 )
 
-export default ({ exercise, onRemove, onNameChange }: ExercisePanelProps) => (
+export default ({ exercise,  onDrag, onRemove, onNameChange }: ExercisePanelProps) => (
   <View style={styles.container}>
     <Input
       autoFocus={!exercise.name}
@@ -43,21 +51,18 @@ export default ({ exercise, onRemove, onNameChange }: ExercisePanelProps) => (
       onChangeText={onNameChange}
     />
     <Sets exerciseId={exercise.id} />
-    <Actions onRemove={onRemove} />
-  </View>
+    <Actions onDrag={onDrag} onRemove={onRemove} />
+  </View >
 )
 
 const styles = StyleSheet.create({
-  actions: {
-    flexDirection: 'row',
-    height: theme.scale * 3,
+  actions:  {
+    flexDirection:  'row',
     justifyContent: 'flex-end',
   },
   container: {
-    backgroundColor: '#444',
+    backgroundColor:  '#444',
     marginBottom: theme.scale * 2,
-    paddingBottom: theme.scale,
-    paddingHorizontal: theme.scale * 2,
-    paddingTop: theme.scale * 2,
+    padding: theme.scale * 2,
   },
 })

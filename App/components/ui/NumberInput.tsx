@@ -42,12 +42,9 @@ export default class NumberInput extends React.Component<NumberInputProps> {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    fontSize: 22,
-    fontWeight: '500',
-  },
   input: {
     color: theme.palette.text,
     fontSize: 18,
+    paddingBottom: theme.scale,
   },
 })

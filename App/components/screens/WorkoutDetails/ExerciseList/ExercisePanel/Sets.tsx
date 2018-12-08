@@ -60,7 +60,6 @@ export default class Sets extends React.Component<SetsProps> {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: theme.scale,
-    marginTop: theme.scale * 2,
+    marginVertical: theme.scale * 2,
   },
 })
