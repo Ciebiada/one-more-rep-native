@@ -12,7 +12,9 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: NavigationScreenProps) => ({
   onAddWorkoutClick: () => {
-    dispatch(addWorkout())
+    const workout = addWorkout()
+    dispatch(workout)
+    ownProps.navigation.navigate('WorkoutDetails', { id: workout.payload.id})
   },
   onWorkoutClick: (id: string) => () => {
     ownProps.navigation.navigate('WorkoutDetails', { id })

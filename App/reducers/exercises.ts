@@ -11,9 +11,9 @@ export interface Exercise {
   sets: string[]
 }
 
-type ExercisesAction = ActionType<typeof exercises> | ActionType<typeof sets>
+export type ExerciseAction = ActionType<typeof exercises> | ActionType<typeof sets>
 
-const byId = (state: { [id: string]: Exercise } = {}, action: ExercisesAction) => {
+const byId = (state: { [id: string]: Exercise } = {}, action: ExerciseAction) => {
   switch (action.type) {
     case getType(exercises.addExercise):
       return R.assoc(action.payload.exercise.id, action.payload.exercise, state)
@@ -42,7 +42,7 @@ const byId = (state: { [id: string]: Exercise } = {}, action: ExercisesAction) =
   }
 }
 
-const allIds = (state: string[] = [], action: ExercisesAction) => {
+const allIds = (state: string[] = [], action: ExerciseAction) => {
   switch (action.type) {
     case getType(exercises.addExercise):
       return R.append(action.payload.exercise.id, state)

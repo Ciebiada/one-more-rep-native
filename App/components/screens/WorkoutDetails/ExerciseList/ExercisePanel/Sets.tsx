@@ -14,31 +14,31 @@ interface SetsProps {
 }
 
 export default class Sets extends React.Component<SetsProps> {
-  public componentDidMount() {
-    const {sets, onSetsEmpty} = this.props
+  // public componentDidMount() {
+  //   const {sets, onSetsEmpty} = this.props
 
-    if (R.isEmpty(sets)) {
-      onSetsEmpty()
-    }
-  }
+  //   if (R.isEmpty(sets)) {
+  //     onSetsEmpty()
+  //   }
+  // }
 
-  public componentDidUpdate() {
-    const {sets, onSetBlank, onSetsEmpty} = this.props
+  // public componentDidUpdate() {
+  //   const {sets, onSetBlank, onSetsEmpty} = this.props
 
-    const lastSet = R.last(sets)
+  //   const lastSet = R.last(sets)
 
-    if (lastSet && (lastSet.weight || lastSet.reps)) {
-      onSetsEmpty()
-    }
+  //   if (lastSet && (lastSet.weight || lastSet.reps)) {
+  //     onSetsEmpty()
+  //   }
 
-    const init = R.init(sets)
+  //   const init = R.init(sets)
 
-    init.forEach((set) => {
-      if (!set.weight && !set.reps) {
-        onSetBlank(set.id)
-      }
-    })
-  }
+  //   init.forEach((set) => {
+  //     if (!set.weight && !set.reps) {
+  //       onSetBlank(set.id)
+  //     }
+  //   })
+  // }
 
   public render() {
     const { onRepsUpdate, onWeightUpdate, sets } = this.props

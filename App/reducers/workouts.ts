@@ -12,9 +12,9 @@ export interface Workout {
   exercises: string[]
 }
 
-type WorkoutsAction = ActionType<typeof workouts> | ActionType<typeof exercises>
+export type WorkoutAction = ActionType<typeof workouts> | ActionType<typeof exercises>
 
-const byId = (state: { [id: string]: Workout } = {}, action: WorkoutsAction) => {
+const byId = (state: { [id: string]: Workout } = {}, action: WorkoutAction) => {
   switch (action.type) {
     case getType(workouts.addWorkout):
       return R.assoc(action.payload.id, action.payload, state)
@@ -33,9 +33,12 @@ const byId = (state: { [id: string]: Workout } = {}, action: WorkoutsAction) => 
         state,
       )
     case getType(exercises.removeExercise):
-      return R.assocPath(
-        [action.payload.workoutId, 'exercises'],
-        R.without([action.payload.exerciseId], state[action.payload.workoutId].exercises),
+      return R.when<typeof state, typeof state>(
+        R.has(action.payload.workoutId),
+        R.over(
+          R.lensPath([action.payload.workoutId, 'exercises']),
+          R.without([action.payload.exerciseId]),
+        ),
         state,
       )
     default:
@@ -43,7 +46,7 @@ const byId = (state: { [id: string]: Workout } = {}, action: WorkoutsAction) => 
   }
 }
 
-const allIds = (state: string[] = [], action: WorkoutsAction) => {
+const allIds = (state: string[] = [], action: WorkoutAction) => {
   switch (action.type) {
     case getType(workouts.addWorkout):
       return R.append(action.payload.id, state)

@@ -75,7 +75,7 @@ const Details = ({workout, onNameChange, onDateChange}: DetailsProps) => (
 )
 
 export default (props: WorkoutListProps) => {
-  const {navigation, workout} = props
+  const {navigation, workout, onDeleteWorkoutClick, onAddExerciseClick} = props
 
   return (
     <Container>
