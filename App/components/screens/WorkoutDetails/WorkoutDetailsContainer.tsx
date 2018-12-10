@@ -1,10 +1,10 @@
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { addExercise } from '../../../actions/exercises'
-import { removeWorkout, updateWorkout } from '../../../actions/workouts'
-import { RootState } from '../../../reducers'
-import { getWorkout } from '../../../reducers/workouts'
+import { addExercise } from '../../../exercises/actions'
+import { RootState } from '../../../reducer'
+import { removeWorkout, updateWorkout } from '../../../workouts/actions'
+import { getWorkout } from '../../../workouts/selectors'
 import WorkoutDetails from './WorkoutDetails'
 
 const mapStateToProps = (state: RootState, ownProps: NavigationScreenProps) => ({

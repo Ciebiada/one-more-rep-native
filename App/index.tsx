@@ -3,12 +3,12 @@ import offlineConfig from '@redux-offline/redux-offline/lib/defaults'
 import React from 'react'
 import { createStackNavigator } from 'react-navigation'
 import { Provider } from 'react-redux'
-import { applyMiddleware, compose, createStore, StoreEnhancer } from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import { createEpicMiddleware } from 'redux-observable'
 import WorkoutDetails from './components/screens/WorkoutDetails'
 import WorkoutList from './components/screens/WorkoutList'
-import epic from './epics'
-import reducer from './reducers'
+import epic from './epic'
+import reducer from './reducer'
 
 const epicMiddlware = createEpicMiddleware()
 

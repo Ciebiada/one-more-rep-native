@@ -1,9 +1,10 @@
 import { createAction } from 'typesafe-actions'
-import { Exercise } from '../reducers/exercises'
+import { Exercise } from './reducer'
 
 export const addExercise = createAction('exercises/ADD', (resolve) =>
   (workoutId: string) => resolve({
     exercise: {
+      deleted: false,
       id: new Date().toJSON(),
       name: '',
       sets: [],
@@ -13,10 +14,7 @@ export const addExercise = createAction('exercises/ADD', (resolve) =>
 )
 
 export const removeExercise = createAction('exercises/REMOVE', (resolve) =>
-  (workoutId: string, exerciseId: string) => resolve({
-    exerciseId,
-    workoutId,
-  }),
+  (id: string) => resolve(id),
  )
 
 export const updateExercise = createAction('exercises/UPDATE', (resolve) =>

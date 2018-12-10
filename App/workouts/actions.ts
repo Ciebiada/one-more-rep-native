@@ -1,7 +1,7 @@
 import { getHours } from 'date-fns'
 import * as R from 'ramda'
 import { createAction } from 'typesafe-actions'
-import { Workout } from '../reducers/workouts'
+import { Workout } from './reducer'
 
 const timeBasedName = (time: Date) =>
   R.cond([
@@ -14,6 +14,7 @@ const timeBasedName = (time: Date) =>
 export const addWorkout = createAction('workouts/ADD', (resolve) =>
   () => resolve({
     date: new Date().toJSON(),
+    deleted: false,
     exercises: [],
     id: new Date().toJSON(),
     name: timeBasedName(new Date()),

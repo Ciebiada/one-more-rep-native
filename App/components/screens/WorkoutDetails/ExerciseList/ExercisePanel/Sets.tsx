@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Set } from '../../../../../reducers/sets'
+import { Set } from '../../../../../sets/reducer'
 import theme from '../../../../../theme'
 import SetComponent from './Set'
 

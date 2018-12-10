@@ -1,9 +1,9 @@
 import { NavigationScreenProps } from 'react-navigation'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { addWorkout } from '../../../actions/workouts'
-import { RootState } from '../../../reducers'
-import { getWorkouts } from '../../../reducers/workouts'
+import { RootState } from '../../../reducer'
+import { addWorkout } from '../../../workouts/actions'
+import { getWorkouts } from '../../../workouts/selectors'
 import WorkoutList from './WorkoutList'
 
 const mapStateToProps = (state: RootState) => ({

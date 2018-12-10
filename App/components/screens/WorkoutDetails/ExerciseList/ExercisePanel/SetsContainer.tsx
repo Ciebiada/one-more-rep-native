@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { addSet, removeSet, updateSet } from '../../../../../actions/sets'
-import { RootState } from '../../../../../reducers'
-import { getSets } from '../../../../../reducers/sets'
+import { RootState } from '../../../../../reducer'
+import { addSet, removeSet, updateSet } from '../../../../../sets/actions'
+import { getSets } from '../../../../../sets/selectors'
 import Sets from './Sets'
 
 interface OwnProps {
@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => ({
     dispatch(updateSet(id, {reps}))
   },
   onSetBlank: (id: string) => {
-    dispatch(removeSet(ownProps.exerciseId, id))
+    dispatch(removeSet(id))
   },
   onSetsEmpty: () => {
     dispatch(addSet(ownProps.exerciseId))

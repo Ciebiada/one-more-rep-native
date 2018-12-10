@@ -1,15 +1,15 @@
 import * as R from 'ramda'
 import { combineReducers } from 'redux'
 import { ActionType, getType } from 'typesafe-actions'
-import { RootState } from '.'
-import * as exercises from '../actions/exercises'
-import * as workouts from '../actions/workouts'
+import * as exercises from '../exercises/actions'
+import * as workouts from './actions'
 
 export interface Workout {
+  date: string
+  deleted: boolean
+  exercises: string[]
   id: string
   name: string
-  date: string
-  exercises: string[]
 }
 
 export type WorkoutAction = ActionType<typeof workouts> | ActionType<typeof exercises>
@@ -18,27 +18,22 @@ const byId = (state: { [id: string]: Workout } = {}, action: WorkoutAction) => {
   switch (action.type) {
     case getType(workouts.addWorkout):
       return R.assoc(action.payload.id, action.payload, state)
+    case getType(workouts.removeWorkout):
+      return R.assocPath(
+        [action.payload, 'deleted'],
+        true,
+        state,
+      )
     case getType(workouts.updateWorkout):
       return R.assoc(
         action.payload.id,
         R.merge(state[action.payload.id], action.payload.props),
         state,
       )
-    case getType(workouts.removeWorkout):
-      return R.dissoc<typeof state>(action.payload, state)
     case getType(exercises.addExercise):
       return R.assocPath(
         [action.payload.workoutId, 'exercises'],
         R.append(action.payload.exercise.id, state[action.payload.workoutId].exercises),
-        state,
-      )
-    case getType(exercises.removeExercise):
-      return R.when<typeof state, typeof state>(
-        R.has(action.payload.workoutId),
-        R.over(
-          R.lensPath([action.payload.workoutId, 'exercises']),
-          R.without([action.payload.exerciseId]),
-        ),
         state,
       )
     default:
@@ -50,21 +45,10 @@ const allIds = (state: string[] = [], action: WorkoutAction) => {
   switch (action.type) {
     case getType(workouts.addWorkout):
       return R.append(action.payload.id, state)
-    case getType(workouts.removeWorkout):
-      return R.without([action.payload], state)
     default:
       return state
   }
 }
-
-export const getWorkouts = (state: RootState) =>
-  R.sort(
-    R.descend<Workout>(R.prop('date')),
-    state.workouts.allIds.map((id) => state.workouts.byId[id]),
-  )
-
-export const getWorkout = (state: RootState, id: string) =>
-  state.workouts.byId[id]
 
 export default combineReducers({
   allIds,

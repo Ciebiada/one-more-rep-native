@@ -1,8 +1,9 @@
 import { createAction } from 'typesafe-actions'
-import { Set } from '../reducers/sets'
+import { Set } from './reducer'
 
 export const addSet = createAction('sets/ADD', (resolve) =>
   (exerciseId: string) => resolve({
+    deleted: false,
     exerciseId,
     set: {
       id: new Date().toJSON(),
@@ -11,10 +12,7 @@ export const addSet = createAction('sets/ADD', (resolve) =>
 )
 
 export const removeSet = createAction('sets/REMOVE', (resolve) =>
-  (exerciseId: string, setId: string) => resolve({
-    exerciseId,
-    setId,
-  }),
+  (id: string) => resolve(id),
  )
 
 export const updateSet = createAction('sets/UPDATE', (resolve) =>

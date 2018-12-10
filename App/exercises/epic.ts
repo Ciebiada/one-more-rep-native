@@ -1,9 +1,9 @@
 import { combineEpics, Epic } from 'redux-observable'
 import { filter, map } from 'rxjs/operators'
 import { isActionOf } from 'typesafe-actions'
-import { addExercise } from '../actions/exercises'
-import { ExerciseAction } from '../reducers/exercises'
-import { addSet } from './../actions/sets'
+import { addSet } from '../sets/actions'
+import { addExercise } from './actions'
+import { ExerciseAction } from './reducer'
 
 const addFirstSet: Epic<ExerciseAction> = (action$) => action$.pipe(
   filter(isActionOf(addExercise)),
