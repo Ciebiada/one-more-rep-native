@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import React, { ReactElement } from 'react'
-import { TouchableOpacity } from 'react-native'
+import { FlatList } from 'react-native'
 import DraggableFlatList from 'react-native-draggable-flatlist'
 import { Exercise } from '../../../../exercises/reducer'
 import Heading from '../../../ui/Heading'
@@ -26,20 +26,18 @@ const Empty = () => (
 export default ({
   exercises, header, onExerciseNameChange, onExerciseRemove, onOrderChange,
 }: ExerciseListProps) => (
-    <DraggableFlatList
+    <FlatList
       ListHeaderComponent={header}
       ListEmptyComponent={<Empty />}
       data={exercises}
       keyboardShouldPersistTaps="handled"
-      renderItem={({ item, move, moveEnd }) =>
+      renderItem={({ item }) =>
         <ExercisePanel
           key={item.id}
           exercise={item}
-          onDrag={move}
           onRemove={onExerciseRemove(item.id)}
           onNameChange={onExerciseNameChange(item.id)}
         />}
-      onMoveEnd={({ data }) => onOrderChange(data.map(R.prop('id')))}
       keyExtractor={(item) => item.id}
     />
 )

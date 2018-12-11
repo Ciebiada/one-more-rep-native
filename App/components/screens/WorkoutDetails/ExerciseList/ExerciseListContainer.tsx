@@ -11,7 +11,7 @@ interface OwnProps {
 }
 
 const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
-  exercises: getExercises(state, ownProps.workoutId),
+  exercises: getExercises(state, ownProps),
 })
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: OwnProps) => ({

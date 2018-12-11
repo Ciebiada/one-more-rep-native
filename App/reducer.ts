@@ -6,8 +6,8 @@ import workouts from './workouts/reducer'
 
 const reducer = combineReducers({
   exercises,
-  workouts,
   sets,
+  workouts,
 })
 
 export default reducer

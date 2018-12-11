@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import set from 'ramda/es/set'
 import { combineReducers } from 'redux'
 import { ActionType, getType } from 'typesafe-actions'
 import * as exercises from '../exercises/actions'
@@ -8,6 +9,7 @@ import * as sets from './actions'
 export interface Set {
   deleted: boolean
   id: string
+  exerciseId: string
   reps?: number
   weight?: number
 }
@@ -17,7 +19,7 @@ export type SetAction = ActionType<typeof sets> | ActionType<typeof exercises>
 const byId = (state: { [id: string]: Set } = {}, action: SetAction) => {
   switch (action.type) {
     case getType(sets.addSet):
-      return R.assoc(action.payload.set.id, action.payload.set, state)
+      return R.assoc(action.payload.id, action.payload, state)
     case getType(sets.removeSet):
       return R.assocPath(
         [action.payload, 'deleted'],
@@ -25,20 +27,25 @@ const byId = (state: { [id: string]: Set } = {}, action: SetAction) => {
         state,
       )
     case getType(sets.updateSet):
+      const updatedSet = R.pipe(
+        R.mergeDeepLeft(action.payload.props),
+        R.when((s) => !s.reps && !s.weight, R.mergeDeepLeft({deleted: true})),
+      )(state[action.payload.id])
+
       return R.assoc(
         action.payload.id,
-        R.merge(state[action.payload.id], action.payload.props),
+        updatedSet,
         state,
       )
     default:
-      return state
+return state
   }
 }
 
 const allIds = (state: string[] = [], action: SetAction) => {
   switch (action.type) {
     case getType(sets.addSet):
-      return R.append(action.payload.set.id, state)
+      return R.append(action.payload.id, state)
     default:
       return state
   }

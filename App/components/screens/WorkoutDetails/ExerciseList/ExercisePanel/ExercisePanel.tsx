@@ -1,6 +1,6 @@
 import React from 'react'
 import { Alert, StyleSheet, View } from 'react-native'
-import { Exercise } from '../../../../../reducers/exercises'
+import { Exercise } from '../../../../../exercises/reducer'
 import theme from '../../../../../theme'
 import IconButton from '../../../../ui/IconButton'
 import Input from '../../../../ui/Input'
@@ -12,7 +12,6 @@ interface ExercisePanelProps extends ActionsProps {
 }
 
 interface ActionsProps {
-  onDrag: () => void
   onRemove: () => void
 }
 
@@ -23,14 +22,8 @@ const deleteExerciseModal = (deleteExercise: () => void) => () => {
   ])
 }
 
-const Actions = ({ onDrag, onRemove }: ActionsProps) => (
+const Actions = ({ onRemove }: ActionsProps) => (
   <View style={styles.actions}>
-    <IconButton
-      iconName="drag"
-      size={theme.scale * 3}
-      color={theme.palette.textSecondary}
-      onPressIn={onDrag}
-    />
     <IconButton
       iconName="delete"
       size={theme.scale * 3}
@@ -41,7 +34,7 @@ const Actions = ({ onDrag, onRemove }: ActionsProps) => (
   </View>
 )
 
-export default ({ exercise,  onDrag, onRemove, onNameChange }: ExercisePanelProps) => (
+export default ({ exercise, onRemove, onNameChange }: ExercisePanelProps) => (
   <View style={styles.container}>
     <Input
       autoFocus={!exercise.name}
@@ -51,7 +44,7 @@ export default ({ exercise,  onDrag, onRemove, onNameChange }: ExercisePanelProp
       onChangeText={onNameChange}
     />
     <Sets exerciseId={exercise.id} />
-    <Actions onDrag={onDrag} onRemove={onRemove} />
+    <Actions onRemove={onRemove} />
   </View >
 )
 

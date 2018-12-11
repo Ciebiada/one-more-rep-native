@@ -1,9 +1,6 @@
-import * as R from 'ramda'
 import { RootState } from '../reducer'
-import { Exercise } from './reducer'
 
-export const getExercises = (state: RootState, workoutId: string) =>
-  R.pipe<string[], Exercise[], Exercise[]>(
-    R.map((id) => state.exercises.byId[id]),
-    R.reject(R.propEq('deleted', true)),
-  )(state.workouts.byId[workoutId].exercises)
+export const getExercises = (state: RootState, props: { workoutId: string }) =>
+  state.workouts.byId[props.workoutId].exercises
+    .map((exerciseId) => state.exercises.byId[exerciseId])
+    .filter(({ deleted }) => !deleted )

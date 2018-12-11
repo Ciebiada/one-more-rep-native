@@ -33,7 +33,7 @@ const byId = (state: { [id: string]: Workout } = {}, action: WorkoutAction) => {
     case getType(exercises.addExercise):
       return R.assocPath(
         [action.payload.workoutId, 'exercises'],
-        R.append(action.payload.exercise.id, state[action.payload.workoutId].exercises),
+        R.append(action.payload.id, state[action.payload.workoutId].exercises),
         state,
       )
     default:

@@ -8,7 +8,7 @@ import { getWorkout } from '../../../workouts/selectors'
 import WorkoutDetails from './WorkoutDetails'
 
 const mapStateToProps = (state: RootState, ownProps: NavigationScreenProps) => ({
-  workout: getWorkout(state, ownProps.navigation.getParam('id')),
+  workout: getWorkout(state, ownProps),
 })
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: NavigationScreenProps) => ({

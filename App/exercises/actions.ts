@@ -3,12 +3,10 @@ import { Exercise } from './reducer'
 
 export const addExercise = createAction('exercises/ADD', (resolve) =>
   (workoutId: string) => resolve({
-    exercise: {
-      deleted: false,
-      id: new Date().toJSON(),
-      name: '',
-      sets: [],
-    },
+    deleted: false,
+    id: new Date().toJSON(),
+    name: '',
+    sets: [],
     workoutId,
   }),
 )

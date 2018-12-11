@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import { NavigationScreenProps } from 'react-navigation'
 import { RootState } from '../reducer'
 import { Workout } from './reducer'
 
@@ -11,5 +12,5 @@ export const getWorkouts = (state: RootState) =>
     )(state.workouts.allIds),
   )
 
-export const getWorkout = (state: RootState, id: string) =>
-  state.workouts.byId[id]
+export const getWorkout = (state: RootState, props: NavigationScreenProps) =>
+  state.workouts.byId[props.navigation.getParam('id')]

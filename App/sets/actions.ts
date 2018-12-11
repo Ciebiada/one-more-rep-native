@@ -5,9 +5,7 @@ export const addSet = createAction('sets/ADD', (resolve) =>
   (exerciseId: string) => resolve({
     deleted: false,
     exerciseId,
-    set: {
-      id: new Date().toJSON(),
-    },
+    id: new Date().toJSON(),
   }),
 )
 

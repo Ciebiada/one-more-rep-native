@@ -9,6 +9,7 @@ export interface Exercise {
   name: string
   sets: string[]
   deleted: boolean
+  workoutId: string
 }
 
 export type ExerciseAction = ActionType<typeof exercises> | ActionType<typeof sets>
@@ -16,7 +17,7 @@ export type ExerciseAction = ActionType<typeof exercises> | ActionType<typeof se
 const byId = (state: { [id: string]: Exercise } = {}, action: ExerciseAction) => {
   switch (action.type) {
     case getType(exercises.addExercise):
-      return R.assoc(action.payload.exercise.id, action.payload.exercise, state)
+      return R.assoc(action.payload.id, action.payload, state)
     case getType(exercises.removeExercise):
       return R.assocPath(
         [action.payload, 'deleted'],
@@ -32,13 +33,7 @@ const byId = (state: { [id: string]: Exercise } = {}, action: ExerciseAction) =>
     case getType(sets.addSet):
       return R.assocPath(
         [action.payload.exerciseId, 'sets'],
-        R.append(action.payload.set.id, state[action.payload.exerciseId].sets),
-        state,
-      )
-    case getType(sets.removeSet):
-      return R.assocPath(
-        [action.payload.exerciseId, 'sets'],
-        R.without([action.payload.setId], state[action.payload.exerciseId].sets),
+        R.append(action.payload.id, state[action.payload.exerciseId].sets),
         state,
       )
     default:
@@ -49,7 +44,7 @@ const byId = (state: { [id: string]: Exercise } = {}, action: ExerciseAction) =>
 const allIds = (state: string[] = [], action: ExerciseAction) => {
   switch (action.type) {
     case getType(exercises.addExercise):
-      return R.append(action.payload.exercise.id, state)
+      return R.append(action.payload.id, state)
     default:
       return state
   }
