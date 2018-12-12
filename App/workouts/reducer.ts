@@ -57,6 +57,8 @@ const allIds = (state: string[] = [], action: WorkoutAction) => {
     case getType(workouts.addWorkout):
     case getType(workouts.cloneWorkout):
       return R.append(action.payload.id, state)
+    case getType(workouts.removeAllWorkouts):
+      return []
     default:
       return state
   }

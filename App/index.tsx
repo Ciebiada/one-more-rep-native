@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation'
 import { Provider } from 'react-redux'
 import { applyMiddleware, compose, createStore } from 'redux'
 import { createEpicMiddleware } from 'redux-observable'
+import Settings from './components/screens/Settings'
 import WorkoutDetails from './components/screens/WorkoutDetails'
 import WorkoutList from './components/screens/WorkoutList'
 import epic from './epic'
@@ -22,12 +23,21 @@ const store = createStore(
 
 epicMiddlware.run(epic)
 
-const RootStack = createStackNavigator({
+const MainStack = createStackNavigator({
   WorkoutDetails,
   WorkoutList,
 }, {
+    headerMode: 'none',
+    initialRouteName: 'WorkoutList',
+})
+
+const RootStack = createStackNavigator({
+  MainStack,
+  Settings,
+}, {
   headerMode: 'none',
-  initialRouteName: 'WorkoutList',
+  initialRouteName: 'MainStack',
+  mode: 'modal',
 })
 
 export default () => (
@@ -35,6 +45,3 @@ export default () => (
     <RootStack />
   </Provider>
 )
-
-// import { AsyncStorage } from 'react-native'
-// AsyncStorage.clear()

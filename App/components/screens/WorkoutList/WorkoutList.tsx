@@ -16,6 +16,7 @@ import Subheading from '../../ui/Subheading'
 interface WorkoutListProps extends NavigationScreenProps, ActionsProps {
   workouts: Workout[]
   onWorkoutClick: (id: string) => () => void
+  onSettingsClick: () => void
 }
 
 interface ActionsProps {
@@ -44,10 +45,10 @@ const Empty = () => (
   </Section>
 )
 
-export default ({ workouts, onAddWorkoutClick, onWorkoutClick }: WorkoutListProps) => (
+export default ({ workouts, onAddWorkoutClick, onSettingsClick, onWorkoutClick }: WorkoutListProps) => (
   <Container>
     <Header
-      left={<IconButton iconName="tune" size={32} color={theme.palette.separator} />}
+      left={<IconButton iconName="tune" size={32} color={theme.palette.separator} onPress={onSettingsClick}/>}
       center={<Title />}
       right={<Actions onAddWorkoutClick={onAddWorkoutClick} />}
     />

@@ -33,3 +33,5 @@ export const updateWorkout = createAction('workouts/UPDATE', (resolve) =>
 export const cloneWorkout = createAction('workouts/CLONE', (resolve) =>
   (oldId: string) => resolve({ oldId, id: randomId() }),
 )
+
+export const removeAllWorkouts = createAction('workouts/REMOVE_ALL')

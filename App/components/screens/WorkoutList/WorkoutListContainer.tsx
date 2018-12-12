@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: NavigationScreenProps)
     dispatch(workout)
     ownProps.navigation.navigate('WorkoutDetails', { id: workout.payload.id})
   },
+  onSettingsClick: () => {
+    ownProps.navigation.navigate('Settings')
+  },
   onWorkoutClick: (id: string) => () => {
     ownProps.navigation.navigate('WorkoutDetails', { id })
   },
