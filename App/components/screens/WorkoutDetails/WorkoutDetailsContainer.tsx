@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { addExercise } from '../../../exercises/actions'
 import { RootState } from '../../../reducer'
-import { removeWorkout, updateWorkout } from '../../../workouts/actions'
+import { cloneWorkout, removeWorkout, updateWorkout } from '../../../workouts/actions'
 import { getWorkout } from '../../../workouts/selectors'
 import WorkoutDetails from './WorkoutDetails'
 
@@ -15,6 +15,11 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: NavigationScreenProps)
   onAddExerciseClick: () => {
     const id = ownProps.navigation.getParam('id')
     dispatch(addExercise(id))
+  },
+  onCloneWorkoutClick: () => {
+    const id = ownProps.navigation.getParam('id')
+    dispatch(cloneWorkout(id))
+    ownProps.navigation.navigate('WorkoutList')
   },
   onDateChange: (date: string) => {
     const id = ownProps.navigation.getParam('id')

@@ -30,7 +30,18 @@ const byId = (state: { [id: string]: Workout } = {}, action: WorkoutAction) => {
         R.merge(state[action.payload.id], action.payload.props),
         state,
       )
+    case getType(workouts.cloneWorkout):
+      return R.assoc(
+        action.payload.id,
+        R.mergeDeepRight(R.clone(state[action.payload.oldId]), {
+          date: new Date().toJSON(),
+          exercises: [],
+          id: action.payload.id,
+        }),
+        state,
+      )
     case getType(exercises.addExercise):
+    case getType(exercises.cloneExercise):
       return R.assocPath(
         [action.payload.workoutId, 'exercises'],
         R.append(action.payload.id, state[action.payload.workoutId].exercises),
@@ -44,6 +55,7 @@ const byId = (state: { [id: string]: Workout } = {}, action: WorkoutAction) => {
 const allIds = (state: string[] = [], action: WorkoutAction) => {
   switch (action.type) {
     case getType(workouts.addWorkout):
+    case getType(workouts.cloneWorkout):
       return R.append(action.payload.id, state)
     default:
       return state

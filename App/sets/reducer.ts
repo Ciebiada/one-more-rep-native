@@ -37,14 +37,24 @@ const byId = (state: { [id: string]: Set } = {}, action: SetAction) => {
         updatedSet,
         state,
       )
+    case getType(sets.cloneSet):
+      return R.assoc(
+        action.payload.id,
+        R.mergeDeepRight(R.clone(state[action.payload.oldId]), {
+          exerciseId: action.payload.exerciseId,
+          id: action.payload.id,
+        }),
+        state,
+      )
     default:
-return state
+      return state
   }
 }
 
 const allIds = (state: string[] = [], action: SetAction) => {
   switch (action.type) {
     case getType(sets.addSet):
+    case getType(sets.cloneSet):
       return R.append(action.payload.id, state)
     default:
       return state

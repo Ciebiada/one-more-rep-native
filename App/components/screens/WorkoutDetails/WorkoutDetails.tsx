@@ -15,6 +15,7 @@ interface WorkoutListProps extends NavigationScreenProps, ActionsProps, DetailsP
 
 interface ActionsProps {
   onAddExerciseClick: () => void
+  onCloneWorkoutClick: () => void
   onDeleteWorkoutClick: () => void
 }
 
@@ -31,13 +32,13 @@ const deleteWorkoutModal = (deleteWorkout: () => void) => () => {
   ])
 }
 
-const Actions = ({ onDeleteWorkoutClick, onAddExerciseClick }: ActionsProps) => (
+const Actions = ({ onCloneWorkoutClick, onDeleteWorkoutClick, onAddExerciseClick }: ActionsProps) => (
   <View style={styles.actions}>
     <IconButton
       iconName="content-copy"
       size={theme.scale * 4}
       color={theme.palette.textSecondary}
-      onPress={() => null}
+      onPress={onCloneWorkoutClick}
     />
     <IconButton
       iconName="delete"
@@ -75,7 +76,7 @@ const Details = ({workout, onNameChange, onDateChange}: DetailsProps) => (
 )
 
 export default (props: WorkoutListProps) => {
-  const {navigation, workout, onDeleteWorkoutClick, onAddExerciseClick} = props
+  const { navigation, workout } = props
 
   return (
     <Container>

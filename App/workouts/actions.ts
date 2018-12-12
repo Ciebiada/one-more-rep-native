@@ -1,6 +1,7 @@
 import { getHours } from 'date-fns'
 import * as R from 'ramda'
 import { createAction } from 'typesafe-actions'
+import { randomId } from '../randomId'
 import { Workout } from './reducer'
 
 const timeBasedName = (time: Date) =>
@@ -16,7 +17,7 @@ export const addWorkout = createAction('workouts/ADD', (resolve) =>
     date: new Date().toJSON(),
     deleted: false,
     exercises: [],
-    id: new Date().toJSON(),
+    id: randomId(),
     name: timeBasedName(new Date()),
   }),
 )
@@ -27,4 +28,8 @@ export const removeWorkout = createAction('workouts/REMOVE', (resolve) =>
 
 export const updateWorkout = createAction('workouts/UPDATE', (resolve) =>
   (id: string, props: Partial<Workout>) => resolve({id, props}),
+)
+
+export const cloneWorkout = createAction('workouts/CLONE', (resolve) =>
+  (oldId: string) => resolve({ oldId, id: randomId() }),
 )
