@@ -35,6 +35,7 @@ export default class DatePicker extends Component<DatePickerProps> {
           </Subheading>
         </TouchableOpacity>
         <DateTimePicker
+          date={date ? new Date(date) : undefined}
           isVisible={datePickerVisible}
           onCancel={this.hideDatePicker}
           onConfirm={this.selectDate}
