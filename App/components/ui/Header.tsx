@@ -7,30 +7,32 @@ import IconButton from './IconButton'
 interface HeaderProps {
   center?: ReactNode
   left?: ReactNode
+  right?: ReactNode,
+  modal?: boolean
   navigation?: NavigationScreenProp<NavigationRoute<NavigationParams>, NavigationParams>
-  right?: ReactNode
 }
 
 interface GoBackProps {
+  modal?: boolean
   navigation: NavigationScreenProp<NavigationRoute<NavigationParams>, NavigationParams>
 }
 
-const GoBack = ({navigation}: GoBackProps) => (
+const GoBack = ({modal, navigation}: GoBackProps) => (
   <IconButton
-    iconName="chevron-left"
+    iconName={modal ? 'close' : 'chevron-left'}
     size={32}
     color={theme.palette.textSecondary}
     onPress={() => navigation.goBack()}
   />
 )
 
-export default ({center, left, navigation, right}: HeaderProps) => (
+export default ({center, left, modal, navigation, right}: HeaderProps) => (
   <SafeAreaView>
     <StatusBar barStyle="light-content" />
-    <View style={styles.header}>
+    <View style={[styles.header, !modal && styles.divider]}>
       <View style={styles.left}>
         {navigation
-          ? <GoBack navigation={navigation} />
+          ? <GoBack modal={modal} navigation={navigation} />
           : left}
       </View>
       <View style={styles.center}>{center}</View>
@@ -44,10 +46,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 2,
   },
-  header: {
-    alignItems: 'center',
+  divider: {
     borderBottomColor: theme.palette.separator,
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  header: {
+    alignItems: 'center',
     flexDirection: 'row',
     marginTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight,
     paddingVertical: theme.scale,

@@ -1,13 +1,17 @@
 import React, { ReactNode } from 'react'
-import { KeyboardAvoidingView, StyleSheet } from 'react-native'
+import { KeyboardAvoidingView, RegisteredStyle, StyleSheet } from 'react-native'
 import theme from '../../theme'
 
 interface ContainerProps {
   children?: ReactNode
+  lightBackground?: boolean
 }
 
-export default ({ children }: ContainerProps) => (
-  <KeyboardAvoidingView style={styles.container} behavior="padding">
+export default ({ children, lightBackground }: ContainerProps) => (
+  <KeyboardAvoidingView
+    style={[styles.container, lightBackground && styles.lightBackground]}
+    behavior="padding"
+  >
     {children}
   </KeyboardAvoidingView>
 )
@@ -16,5 +20,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.palette.background,
     flex: 1,
+  },
+  lightBackground: {
+    backgroundColor: theme.palette.backgroundSecondary,
   },
 })

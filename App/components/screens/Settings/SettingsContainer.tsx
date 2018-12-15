@@ -7,8 +7,7 @@ import Settings from './Settings'
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: NavigationScreenProps) => ({
   clearStorage: () => {
-    AsyncStorage.clear()
-    dispatch(removeAllWorkouts())
+    // dispatch(removeAllWorkouts())
     ownProps.navigation.goBack()
   },
 })

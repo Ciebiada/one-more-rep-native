@@ -17,8 +17,8 @@ const zaorajModal = (clearStorage: () => void) => () => {
 }
 
 export default ({ navigation, clearStorage }: SettingsProps) => (
-  <Container>
-    <Header navigation={navigation}/>
+  <Container lightBackground={true}>
+    <Header navigation={navigation} modal={true}/>
     <Button title="Zaoraj" onPress={zaorajModal(clearStorage)}/>
   </Container>
 )
